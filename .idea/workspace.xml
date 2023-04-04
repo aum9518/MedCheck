@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="85d8a2c7-6a6a-4de5-aa89-c0b989171f14" name="Changes" comment="added package">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/medCheck/model/Hospital.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/medCheck/model/Hospital.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,10 +22,13 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="feature/model/getter/setter" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/medCheck/model/Hospital.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="2NxH9H9Z4yO4hC3QDPdx7VDhC3W" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -107,7 +108,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680610110611</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="added Hospital getter setter">
+      <created>1680638409991</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1680638409991</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -130,6 +138,7 @@
     <MESSAGE value="added InterfaceDaoMethod" />
     <MESSAGE value="added serviceMetods" />
     <MESSAGE value="added database" />
-    <option name="LAST_COMMIT_MESSAGE" value="added database" />
+    <MESSAGE value="added Hospital getter setter" />
+    <option name="LAST_COMMIT_MESSAGE" value="added Hospital getter setter" />
   </component>
 </project>
