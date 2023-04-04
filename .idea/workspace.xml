@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="85d8a2c7-6a6a-4de5-aa89-c0b989171f14" name="Changes" comment="added package" />
+    <list default="true" id="85d8a2c7-6a6a-4de5-aa89-c0b989171f14" name="Changes" comment="added package">
+      <change beforePath="$PROJECT_DIR$/src/medCheck/service/PatientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/medCheck/service/PatientService.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,7 +22,6 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature/dao/loyout" />
         <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
@@ -60,6 +61,7 @@
       <workItem from="1680613602682" duration="172000" />
       <workItem from="1680613936737" duration="17000" />
       <workItem from="1680613980389" duration="1524000" />
+      <workItem from="1680608588749" duration="177000" />
     </task>
     <task id="LOCAL-00001" summary="added package">
       <created>1680600157787</created>
