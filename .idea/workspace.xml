@@ -25,6 +25,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
+        <entry key="$PROJECT_DIR$" value="feature/dao/loyout" />
         <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
@@ -36,19 +37,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;/Users/manasabduganiuulu/IdeaProjects/MedCheck/src/Main.java&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "onboarding.tips.debug.path": "/Users/manasabduganiuulu/IdeaProjects/MedCheck/src/Main.java",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -61,6 +62,9 @@
       <workItem from="1680613602682" duration="172000" />
       <workItem from="1680613936737" duration="17000" />
       <workItem from="1680613980389" duration="631000" />
+      <workItem from="1680613602682" duration="172000" />
+      <workItem from="1680613936737" duration="17000" />
+      <workItem from="1680613980389" duration="1524000" />
     </task>
     <task id="LOCAL-00001" summary="added package">
       <created>1680600157787</created>
@@ -76,7 +80,28 @@
       <option name="project" value="LOCAL" />
       <updated>1680600857145</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="added branch">
+      <created>1680614705620</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1680614705620</updated>
+    </task>
+    <task id="LOCAL-00004" summary="added InterfaceDaoMethod">
+      <created>1680614818425</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1680614818425</updated>
+    </task>
+    <task id="LOCAL-00005" summary="added InterfaceDaoMethod">
+      <created>1680614962393</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1680614962393</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -84,6 +109,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added package" />
-    <option name="LAST_COMMIT_MESSAGE" value="added package" />
+    <MESSAGE value="added branch" />
+    <MESSAGE value="added InterfaceDaoMethod" />
+    <option name="LAST_COMMIT_MESSAGE" value="added InterfaceDaoMethod" />
   </component>
 </project>
