@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="85d8a2c7-6a6a-4de5-aa89-c0b989171f14" name="Changes" comment="added package">
-      <change beforePath="$PROJECT_DIR$/src/medCheck/service/PatientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/medCheck/service/PatientService.java" afterDir="false" />
+    <list default="true" id="85d8a2c7-6a6a-4de5-aa89-c0b989171f14" name="Changes" comment="added Loyout">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/medCheck/database/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/medCheck/database/Database.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
