@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="85d8a2c7-6a6a-4de5-aa89-c0b989171f14" name="Changes" comment="added package">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="85d8a2c7-6a6a-4de5-aa89-c0b989171f14" name="Changes" comment="added all method">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/medCheck/dao/impl/PatientServiceImplDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/medCheck/dao/impl/PatientServiceImplDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/medCheck/service/serviceImpl/PatientServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/medCheck/service/serviceImpl/PatientServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,7 +133,21 @@
       <option name="project" value="LOCAL" />
       <updated>1680637585566</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="added method addPatientToHospital">
+      <created>1680679913486</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1680679913487</updated>
+    </task>
+    <task id="LOCAL-00009" summary="added all method">
+      <created>1680690534395</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1680690534396</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -147,6 +160,8 @@
     <MESSAGE value="added serviceMetods" />
     <MESSAGE value="added database" />
     <MESSAGE value="added class pole" />
-    <option name="LAST_COMMIT_MESSAGE" value="added class pole" />
+    <MESSAGE value="added method addPatientToHospital" />
+    <MESSAGE value="added all method" />
+    <option name="LAST_COMMIT_MESSAGE" value="added all method" />
   </component>
 </project>

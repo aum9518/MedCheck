@@ -133,8 +133,8 @@ public class PatientServiceImplDao implements PatientServiceDao {
     @Override
     public List<Patient> sortPatientsByAge(String ascOrDesc) {
         System.out.println("1.Ascending\n2.Descending");
-        String choose = new Scanner(System.in).nextLine();
-        switch (choose){
+        ascOrDesc = new Scanner(System.in).nextLine();
+        switch (ascOrDesc){
             case "Ascending" ->{
                 List<Hospital>hospitals = database.getHospitals().stream().toList();
                 List<List<Patient>>patients= hospitals.stream().map(Hospital::getPatients).toList();
