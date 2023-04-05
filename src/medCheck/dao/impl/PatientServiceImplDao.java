@@ -6,8 +6,8 @@ import medCheck.exception.MyException;
 import medCheck.model.Hospital;
 import medCheck.model.Patient;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class PatientServiceImplDao implements PatientServiceDao {
@@ -19,14 +19,13 @@ public class PatientServiceImplDao implements PatientServiceDao {
             if (d.getId()==id){
                 isTrue = true;
                 d.getPatients().add(patient);
+                return "Patient successfully added patient: "+patient;
             }else {
                 isTrue = false;
             }
         }
         try{
-            if (isTrue){
-                return "Patient successfully added patient: "+patient;
-            }else {
+            if (!isTrue){
                 throw new MyException("Not found hospital");
             }
         } catch (MyException e) {
@@ -37,31 +36,122 @@ public class PatientServiceImplDao implements PatientServiceDao {
 
     @Override
     public String addPatientsToHospital(Long id, List<Patient> patients) {
+        boolean isTrue = true;
+        for (Hospital h: database.getHospitals()) {
+            if (h.getId()==id){
+                isTrue = true;
+                h.setPatients(patients);
+            }else {
+                isTrue = false;
+            }
+        }
+        try{
+            if (!isTrue){
+                throw new MyException("Not found hospital!");
+            }
+        } catch (MyException e) {
+            System.out.println(e.getMessage());
+        }
         return null;
     }
 
     @Override
     public String updatePatientById(Long id, Patient patientsNewInfo) {
+        boolean isTrue = true;
+        for (Hospital h: database.getHospitals()) {
+            for (Patient p:h.getPatients()) {
+                if (p.getId()==id){
+                    isTrue = true;
+                    h.getPatients().remove(p);
+                    h.getPatients().add(patientsNewInfo);
+                    return "Successfully updated patient: "+ patientsNewInfo;
+                }else {
+                    isTrue = false;
+                }
+            }
+        }
+        try{
+            if (!isTrue){
+                throw new MyException("Not found patient with id: "+id);
+            }
+        } catch (MyException e) {
+            System.out.println(e.getMessage());
+        }
         return null;
     }
 
     @Override
     public void removePatientById(Long id) {
-
+        boolean isTrue = true;
+        for (Hospital h: database.getHospitals()) {
+            for (Patient p:h.getPatients()) {
+                if (p.getId()==id){
+                    isTrue = true;
+                    h.getPatients().remove(p);
+                    System.out.println("Successfully removed patient with id: "+id);
+                }else {
+                    isTrue = false;
+                }
+            }
+        }
+        try{
+            if (!isTrue){
+                throw new MyException("Not found patient with id: "+id);
+            }
+        } catch (MyException | ArithmeticException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
     public Patient getPatientById(Long id) {
+
+        for (Hospital h:database.getHospitals()) {
+            for (Patient p:h.getPatients()) {
+                if (p.getId()==id){
+                    return p;
+                }
+            }
+        }
         return null;
     }
 
     @Override
     public Map<Integer, Patient> getPatientByAge() {
-        return null;
+        Map<Integer,Patient>patientMap = new HashMap<>();
+            List<Hospital>hospitals = database.getHospitals().stream().toList();
+           List<List<Patient>>patients= hospitals.stream().map(Hospital::getPatients).toList();
+
+        for (List<Patient> p:patients) {
+            for (Patient a:p) {
+                patientMap.put(a.getAge(),a);
+            }
+        }
+        return patientMap;
     }
 
     @Override
     public List<Patient> sortPatientsByAge(String ascOrDesc) {
+        System.out.println("1.Ascending\n2.Descending");
+        String choose = new Scanner(System.in).nextLine();
+        switch (choose){
+            case "Ascending" ->{
+                List<Hospital>hospitals = database.getHospitals().stream().toList();
+                List<List<Patient>>patients= hospitals.stream().map(Hospital::getPatients).toList();
+                for (List<Patient> p:patients) {
+                   List<Patient>list1= p.stream().sorted(Comparator.comparing(Patient::getAge)).toList();
+                   return list1;
+                }
+            }
+            case "Descending" ->{
+                List<Hospital>hospitals1 = database.getHospitals().stream().toList();
+                List<List<Patient>>patients1= hospitals1.stream().map(Hospital::getPatients).toList();
+                for (List<Patient> p:patients1) {
+                    List<Patient>list2= p.stream().sorted(Comparator.comparing(Patient::getAge).reversed()).toList();
+                    return list2;
+                }
+            }
+        }
         return null;
     }
 }
