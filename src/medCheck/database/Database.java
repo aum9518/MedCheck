@@ -5,7 +5,7 @@ import medCheck.model.Hospital;
 import java.util.List;
 
 public class Database {
-    private List<Hospital>hospitals;
+    private List<Hospital> hospitals;
 
     public List<Hospital> getHospitals() {
         return hospitals;

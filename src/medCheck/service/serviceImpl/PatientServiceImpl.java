@@ -1,5 +1,6 @@
 package medCheck.service.serviceImpl;
 
+import medCheck.database.Database;
 import medCheck.model.Patient;
 import medCheck.service.PatientService;
 
@@ -22,8 +23,10 @@ public class PatientServiceImpl implements PatientService {
         return null;
     }
 
+
     @Override
     public void removePatientById(Long id) {
+
 
     }
 
