@@ -16,14 +16,14 @@ import java.util.stream.Collectors;
 
 
 public class DoctorServiceImplDao implements DoctorServiceDao {
-
-
     Database database = new Database();
     List<Hospital>hospitals;
     Map<Long,Doctor>doctors;
 
+
     @Override
     public String addDoctorToHospital(Long id, Doctor doctor) {
+
         Hospital hospital = database.getHospitals().stream()
                 .filter(h -> h.getId().equals(id))
                 .findFirst()
