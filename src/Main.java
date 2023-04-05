@@ -1,4 +1,5 @@
 import medCheck.dao.impl.HospitalServiceImplDao;
+import medCheck.database.Database;
 import medCheck.enums.Gender;
 import medCheck.model.Department;
 import medCheck.model.Doctor;
@@ -14,11 +15,12 @@ import medCheck.service.DepartmentService;
 import medCheck.service.serviceImpl.DepartmentServiceImpl;
 import medCheck.service.serviceImpl.DoctorServiceImpl;
 import medCheck.service.serviceImpl.HospitalServiceImpl;
+import medCheck.service.serviceImpl.PatientServiceImpl;
 
 public class Main {
     public static void main(String[] args) {
-
-        System.out.println("Java");
+        Database database = new Database(new ArrayList<>(new ArrayList<>()));
+        PatientServiceImpl servicePatient = new PatientServiceImpl();
 
         HospitalServiceImpl hospitalService = new HospitalServiceImpl();
 
@@ -42,29 +44,23 @@ public class Main {
         Patient patient3 = new Patient(4L, "Kanymgul", "Abdutairovna", 20, Gender.FEMALE);
         List<Patient> patients = new ArrayList<>(List.of(patient, patient1));
         List<Patient> patients1 = new ArrayList<>(List.of(patient2, patient3));
- Feature/WritingSenondMethod
 
         Hospital hospital = new Hospital(1L, "City Clinical Hospital No. 1", "Bishkek, st. Fuchika, 15", departments, doctors, patients);
         Hospital hospital1 = new Hospital(2L, "Republican Hospital No. 2", "Bishkek, st. Kyiv, 110", departments1, doctors1, patients1);
 
-        System.out.println(hospitalService.addHospital(hospital)); //TO ADD HOSPITAL.
-        System.out.println("FIND HOSPITAL BY ID : " + hospitalService.findHospitalById(1L)); //FIND HOSPITAL BY ID.
-        System.out.println("GET ALL HOSPITAL : " + hospitalService.getAllHospital()); //GET ALL HOSPITAL.
-        System.out.println("GET ALL PATIENT FROM HOSPITAL : " + hospitalService.getAllPatientFromHospital(1L)); //GET ALL PATIENT FROM HOSPITAL.
-        System.out.println("DELETE HOSPITAL BY ID : " + hospitalService.deleteHospitalById(1L)); //DELETE HOSPITAL BY ID
-        System.out.println("GET ALL HOSPITAL BY ADDRESS : " + hospitalService.getAllHospitalByAddress("asdfgh")); //GET ALL HOSPITAL BY ADDRESS.
+//        System.out.println(hospitalService.addHospital(hospital)); //TO ADD HOSPITAL.
+//        System.out.println("FIND HOSPITAL BY ID : " + hospitalService.findHospitalById(1L)); //FIND HOSPITAL BY ID.
+//        System.out.println("GET ALL HOSPITAL : " + hospitalService.getAllHospital()); //GET ALL HOSPITAL.
+//        System.out.println("GET ALL PATIENT FROM HOSPITAL : " + hospitalService.getAllPatientFromHospital(1L)); //GET ALL PATIENT FROM HOSPITAL.
+       // System.out.println("DELETE HOSPITAL BY ID : " + hospitalService.deleteHospitalById(1L)); //DELETE HOSPITAL BY ID
+      //  System.out.println("GET ALL HOSPITAL BY ADDRESS : " + hospitalService.getAllHospitalByAddress("asdfgh")); //GET ALL HOSPITAL BY ADDRESS.
 
- master
-
-        Hospital hospital = new Hospital(1L, "City Clinical Hospital No. 1", "Bishkek, st. Fuchika, 15", departments, doctors, patients);
-        Hospital hospital1 = new Hospital(2L, "Republican Hospital No. 2", "Bishkek, st. Kyiv, 110", departments1, doctors1, patients1);
-
-
-        System.out.println(hospitalService.addHospital(hospital)); //TO ADD HOSPITAL.
-        System.out.println("FIND HOSPITAL BY ID : " + hospitalService.findHospitalById(1L)); //FIND HOSPITAL BY ID.
-        System.out.println("GET ALL HOSPITAL : " + hospitalService.getAllHospital()); //GET ALL HOSPITAL.
-        System.out.println("GET ALL PATIENT FROM HOSPITAL : " + hospitalService.getAllPatientFromHospital(1L)); //GET ALL PATIENT FROM HOSPITAL.
-        System.out.println("DELETE HOSPITAL BY ID : " + hospitalService.deleteHospitalById(1L)); //DELETE HOSPITAL BY ID
-        System.out.println("GET ALL HOSPITAL BY ADDRESS : " + hospitalService.getAllHospitalByAddress("asdfgh")); //GET ALL HOSPITAL BY ADDRESS.
+        System.out.println("Add patient to Hospital: "+servicePatient.addPatientToHospital(1L, patient2));
+        System.out.println("Add list of patient: "+servicePatient.addPatientsToHospital(1L, patients1));
+        System.out.println("Get patient by id: "+servicePatient.getPatientById(4L));
+        System.out.println("Get patient by age: "+servicePatient.getPatientByAge());
+        System.out.println("Update patient by id: "+servicePatient.updatePatientById(3L, patient1));
+        System.out.println("Sort patient by age(Ascending/Descending): "+servicePatient.sortPatientsByAge("Descending"));
+        servicePatient.removePatientById(4L);
     }
 }

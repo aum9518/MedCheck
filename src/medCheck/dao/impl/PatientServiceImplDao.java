@@ -11,7 +11,11 @@ import java.util.stream.Collectors;
 
 
 public class PatientServiceImplDao implements PatientServiceDao {
-    private Database database;
+    Hospital hospital = new Hospital(1L, "City Clinical Hospital No. 1", "Bishkek, st. Fuchika, 15", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+    List<Hospital>hospitals= new ArrayList<>(Arrays.asList(hospital));
+
+    Database database = new Database(hospitals);
+
     @Override
     public String addPatientToHospital(Long id, Patient patient) {
         boolean isTrue = true;
@@ -31,6 +35,14 @@ public class PatientServiceImplDao implements PatientServiceDao {
         } catch (MyException e) {
             System.out.println(e.getMessage());
         }
+       /* for (int i = 0; i < database.getHospitals().size(); i++) {
+            System.out.println("dsljk");
+            if (database.getHospitals().get(i).getId()==id){
+                database.getHospitals().get(i).getPatients().add(patient);
+                return "Successfully added patient: "+database.getHospitals().get(i).getPatients();
+            }
+
+        }*/
         return null;
     }
 
@@ -41,6 +53,7 @@ public class PatientServiceImplDao implements PatientServiceDao {
             if (h.getId()==id){
                 isTrue = true;
                 h.setPatients(patients);
+                return "List of patient: "+h.getPatients();
             }else {
                 isTrue = false;
             }
@@ -133,7 +146,6 @@ public class PatientServiceImplDao implements PatientServiceDao {
     @Override
     public List<Patient> sortPatientsByAge(String ascOrDesc) {
         System.out.println("1.Ascending\n2.Descending");
-        ascOrDesc = new Scanner(System.in).nextLine();
         switch (ascOrDesc){
             case "Ascending" ->{
                 List<Hospital>hospitals = database.getHospitals().stream().toList();

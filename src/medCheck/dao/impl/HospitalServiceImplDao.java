@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 public class HospitalServiceImplDao implements HospitalServiceDao {
     Database database = new Database(new ArrayList<>());
+
     @Override
     public String addHospital(Hospital hospital) {
         database.getHospitals().add(hospital);

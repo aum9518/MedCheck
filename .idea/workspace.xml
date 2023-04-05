@@ -4,18 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-
     <list default="true" id="85d8a2c7-6a6a-4de5-aa89-c0b989171f14" name="Changes" comment="added all method">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/medCheck/dao/impl/PatientServiceImplDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/medCheck/dao/impl/PatientServiceImplDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/medCheck/service/serviceImpl/PatientServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/medCheck/service/serviceImpl/PatientServiceImpl.java" afterDir="false" />
-
-    <list default="true" id="85d8a2c7-6a6a-4de5-aa89-c0b989171f14" name="Changes" comment="added package">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/medCheck/dao/impl/HospitalServiceImplDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/medCheck/dao/impl/HospitalServiceImplDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/medCheck/dao/impl/PatientServiceImplDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/medCheck/dao/impl/PatientServiceImplDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/medCheck/service/DepartmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/medCheck/service/DepartmentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/medCheck/service/serviceImpl/DepartmentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/medCheck/service/serviceImpl/DepartmentServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/medCheck/service/serviceImpl/HospitalServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/medCheck/service/serviceImpl/HospitalServiceImpl.java" afterDir="false" />
-
+      <change beforePath="$PROJECT_DIR$/src/medCheck/service/serviceImpl/PatientServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/medCheck/service/serviceImpl/PatientServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +30,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="refactor/serviceHospitalImpl1" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -43,27 +41,6 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "feature/add__field__doctor__class",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "onboarding.tips.debug.path": "/Users/manasabduganiuulu/IdeaProjects/MedCheck/src/Main.java",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "vue.rearranger.settings.migration": "true"
-  }
-}]]></component>
-  <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
@@ -90,7 +67,6 @@
       </method>
     </configuration>
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
-
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="MedCheck" />
       <method v="2">
@@ -99,14 +75,11 @@
     </configuration>
     <recent_temporary>
       <list>
-
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.Main" />
-
         <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.Main (1)" />
-
       </list>
     </recent_temporary>
   </component>
@@ -180,23 +153,6 @@
       <option name="project" value="LOCAL" />
       <updated>1680637585566</updated>
     </task>
-
-    <task id="LOCAL-00008" summary="added method addPatientToHospital">
-      <created>1680679913486</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1680679913487</updated>
-    </task>
-    <task id="LOCAL-00009" summary="added all method">
-      <created>1680690534395</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1680690534396</updated>
-    </task>
-    <option name="localTasksCounter" value="10" />
-
     <task id="LOCAL-00008" summary="added function method addDoctorToHospital">
       <created>1680676761658</created>
       <option name="number" value="00008" />
@@ -231,11 +187,8 @@
     <MESSAGE value="added serviceMetods" />
     <MESSAGE value="added database" />
     <MESSAGE value="added class pole" />
-
     <MESSAGE value="added method addPatientToHospital" />
     <MESSAGE value="added all method" />
-    <option name="LAST_COMMIT_MESSAGE" value="added all method" />
-
     <MESSAGE value="added function method addDoctorToHospital" />
     <MESSAGE value="added HospitalServiceImplDao" />
     <MESSAGE value="added HospitalServiceImplDao" />

@@ -1,17 +1,29 @@
 package medCheck.service.serviceImpl;
 
 import medCheck.dao.impl.PatientServiceImplDao;
+import medCheck.database.Database;
+import medCheck.model.Hospital;
 import medCheck.model.Patient;
 import medCheck.service.PatientService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class PatientServiceImpl implements PatientService {
+   // public Database database;
+    Database database=new Database();
+
+
     PatientServiceImplDao patientServiceImplDao = new PatientServiceImplDao();
+
+ /*   public PatientServiceImpl(Database database) {
+        this.database = database;
+    }*/
+
     @Override
     public String addPatientToHospital(Long id, Patient patient) {
-
+        database.setHospitals(new ArrayList<>());
         return patientServiceImplDao.addPatientToHospital(id,patient);
     }
 
