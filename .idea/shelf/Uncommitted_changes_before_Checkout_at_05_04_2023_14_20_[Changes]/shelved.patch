@@ -1,0 +1,169 @@
+Index: src/medCheck/dao/impl/DoctorServiceImplDao.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package medCheck.dao.impl;\r\n\r\nimport medCheck.dao.DoctorServiceDao;\r\nimport medCheck.dao.HospitalServiceDao;\r\nimport medCheck.database.Database;\r\nimport medCheck.model.Doctor;\r\nimport medCheck.model.Hospital;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\nimport java.util.Map;\r\n\r\n\r\npublic class DoctorServiceImplDao implements DoctorServiceDao {\r\n\r\n    List<Database>databases;\r\n    Map<Long,Doctor>doctors;\r\n\r\n    @Override\r\n    public String addDoctorToHospital(Long id, Doctor doctor) {\r\n        HospitalServiceDao hospitalDao = new HospitalServiceImplDao();\r\n        Hospital hospital = hospitalDao.findHospitalById(id);\r\n        if (hospital != null) {\r\n            hospital.getDoctors().add(doctor);\r\n            doctors.put(doctor.getId(), doctor);\r\n            return \"Doctor added to hospital successfully\";\r\n        } else {\r\n            return \"Hospital not found\";\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public Doctor findDoctorById(Long id) {\r\n        return null;\r\n    }\r\n\r\n    @Override\r\n    public String updateDoctor(Long id, Doctor doctor) {\r\n        return null;\r\n    }\r\n\r\n    @Override\r\n    public void deleteDoctorById(Long id) {\r\n        doctors.remove(id);\r\n    }\r\n\r\n    @Override\r\n    public String assignDoctorToDepartment(Long departmentId, List<Long> doctorsId) {\r\n        return null;\r\n    }\r\n\r\n    @Override\r\n    public List<Doctor> getAllDoctorsByHospitalId(Long id) {\r\n        return null;\r\n    }\r\n\r\n    @Override\r\n    public List<Doctor> getAllDoctorsByDepartmentId(Long id) {\r\n\r\n       return null;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/medCheck/dao/impl/DoctorServiceImplDao.java b/src/medCheck/dao/impl/DoctorServiceImplDao.java
+--- a/src/medCheck/dao/impl/DoctorServiceImplDao.java	(revision 6f485e9c66b3b2cc06e3c5f7ba7bbe06f6c7f2f4)
++++ b/src/medCheck/dao/impl/DoctorServiceImplDao.java	(date 1680682765548)
+@@ -1,62 +1,91 @@
+ package medCheck.dao.impl;
+ 
+ import medCheck.dao.DoctorServiceDao;
+-import medCheck.dao.HospitalServiceDao;
+ import medCheck.database.Database;
++import medCheck.model.Department;
+ import medCheck.model.Doctor;
+ import medCheck.model.Hospital;
+ 
+-import java.util.ArrayList;
+ import java.util.List;
+ import java.util.Map;
+-
++import java.util.stream.Collectors;
++import java.util.stream.Stream;
+ 
+ public class DoctorServiceImplDao implements DoctorServiceDao {
+ 
+-    List<Database>databases;
++    Database database = new Database();
+     Map<Long,Doctor>doctors;
+-
+     @Override
+     public String addDoctorToHospital(Long id, Doctor doctor) {
+-        HospitalServiceDao hospitalDao = new HospitalServiceImplDao();
+-        Hospital hospital = hospitalDao.findHospitalById(id);
+-        if (hospital != null) {
+-            hospital.getDoctors().add(doctor);
+-            doctors.put(doctor.getId(), doctor);
+-            return "Doctor added to hospital successfully";
+-        } else {
+-            return "Hospital not found";
+-        }
++        Hospital hospital = database.getHospitals().stream()
++                .filter(h -> h.getId().equals(id))
++                .findFirst()
++                .orElse(null);
++        if (hospital == null) {
++            return "Hospital not found!";
++        }
++        doctor.setId(doctor.getId());
++        hospital.getDoctors().add(doctor);
++        doctors.put(doctor.getId(), doctor);
++        return "Doctor added to hospital successfully.";
+     }
+ 
+     @Override
+     public Doctor findDoctorById(Long id) {
+-        return null;
++        return  doctors.get(id);
+     }
+ 
+     @Override
+     public String updateDoctor(Long id, Doctor doctor) {
+-        return null;
+-    }
++        if (!doctors.containsKey(id)) {
++            return "Doctor not found!";
++        }
++            doctor.setId(id);
++            doctors.put(id, doctor);
++            return "Doctor updated successfully";
+ 
++    }
+     @Override
+     public void deleteDoctorById(Long id) {
+         doctors.remove(id);
++        database.getHospitals().stream()
++                .flatMap(d->d.getDepartments().
++                        stream()).forEach(i->i.getDoctors().removeIf(doctor -> doctor.getId().equals(id)));
++
+     }
+ 
+     @Override
+     public String assignDoctorToDepartment(Long departmentId, List<Long> doctorsId) {
+-        return null;
++        Department department =database.getHospitals().stream()
++            .flatMap(h -> h.getDepartments().stream())
++            .filter(d -> d.getId().equals(departmentId))
++            .findFirst()
++            .orElse(null);
++        if (department == null) {
++            return "Department not found!";
++        }
++        List<Doctor> doctorsToAdd = doctorsId.stream()
++                .map(doctorId -> doctors.get(doctorId))
++                .toList();
++        department.getDoctors().addAll(doctorsToAdd);
++        return "Doctors assigned to department successfully.";
+     }
+ 
+     @Override
+     public List<Doctor> getAllDoctorsByHospitalId(Long id) {
+-        return null;
++        return database.getHospitals().stream()
++                .filter(h -> h.getId().equals(id))
++                .flatMap(h -> h.getDoctors().stream())
++                .collect(Collectors.toList());
+     }
+ 
+     @Override
+     public List<Doctor> getAllDoctorsByDepartmentId(Long id) {
+-
+-       return null;
++        return database.getHospitals().stream()
++                .flatMap(h -> h.getDepartments().stream())
++                .filter(d -> d.getId().equals(id))
++                .flatMap(d -> d.getDoctors().stream())
++                .collect(Collectors.toList());
+     }
+-}
++
++}
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"85d8a2c7-6a6a-4de5-aa89-c0b989171f14\" name=\"Changes\" comment=\"added package\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/misc.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/misc.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_4_4_23__17_35__Changes_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_4_4_23__17_35__Changes_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_4_23__16_33__Changes_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_4_23__16_33__Changes_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_4_23__16_36__Changes_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_4_23__16_36__Changes_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_4_23__16_48__Changes_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_4_23__16_48__Changes_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_4_23__17_58__Changes_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_4_23__17_58__Changes_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_4_23__18_15__Changes_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_4_23__18_15__Changes_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Main.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Main.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/medCheck/dao/impl/DoctorServiceImplDao.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/medCheck/dao/impl/DoctorServiceImplDao.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"master\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProblemsViewState\">\r\n    <option name=\"selectedTabId\" value=\"CurrentFile\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2NxH9H9Z4yO4hC3QDPdx7VDhC3W\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"WebServerToolWindowFactoryState\": \"false\",\r\n    \"git-widget-placeholder\": \"feature/add__function\",\r\n    \"node.js.detected.package.eslint\": \"true\",\r\n    \"node.js.detected.package.tslint\": \"true\",\r\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\r\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\r\n    \"onboarding.tips.debug.path\": \"/Users/manasabduganiuulu/IdeaProjects/MedCheck/src/Main.java\",\r\n    \"project.structure.last.edited\": \"Project\",\r\n    \"project.structure.proportion\": \"0.0\",\r\n    \"project.structure.side.proportion\": \"0.0\",\r\n    \"vue.rearranger.settings.migration\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"85d8a2c7-6a6a-4de5-aa89-c0b989171f14\" name=\"Changes\" comment=\"\" />\r\n      <created>1680598664239</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1680598664239</updated>\r\n      <workItem from=\"1680598666233\" duration=\"2481000\" />\r\n      <workItem from=\"1680613602682\" duration=\"172000\" />\r\n      <workItem from=\"1680613936737\" duration=\"17000\" />\r\n      <workItem from=\"1680613980389\" duration=\"631000\" />\r\n      <workItem from=\"1680613602682\" duration=\"172000\" />\r\n      <workItem from=\"1680613936737\" duration=\"17000\" />\r\n      <workItem from=\"1680613980389\" duration=\"1524000\" />\r\n      <workItem from=\"1680671013647\" duration=\"804000\" />\r\n      <workItem from=\"1680672078579\" duration=\"2928000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"added package\">\r\n      <created>1680600157787</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680600157787</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"added package\">\r\n      <created>1680600857145</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680600857145</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"added branch\">\r\n      <created>1680614705620</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680614705620</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"added InterfaceDaoMethod\">\r\n      <created>1680614818425</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680614818425</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"added InterfaceDaoMethod\">\r\n      <created>1680614962393</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680614962393</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"added database\">\r\n      <created>1680610110610</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680610110611</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"added class pole\">\r\n      <created>1680637585566</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680637585566</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"8\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"added package\" />\r\n    <MESSAGE value=\"added branch\" />\r\n    <MESSAGE value=\"added InterfaceDaoMethod\" />\r\n    <MESSAGE value=\"added serviceMetods\" />\r\n    <MESSAGE value=\"added database\" />\r\n    <MESSAGE value=\"added class pole\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"added class pole\" />\r\n  </component>\r\n  <component name=\"com.intellij.coverage.CoverageDataManagerImpl\">\r\n    <SUITE FILE_PATH=\"coverage/MedCheck$Main.ic\" NAME=\"Main Coverage Results\" MODIFIED=\"1680672801435\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"idea\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 6f485e9c66b3b2cc06e3c5f7ba7bbe06f6c7f2f4)
++++ b/.idea/workspace.xml	(date 1680682786355)
+@@ -5,15 +5,6 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="85d8a2c7-6a6a-4de5-aa89-c0b989171f14" name="Changes" comment="added package">
+-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_4_4_23__17_35__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_4_4_23__17_35__Changes_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_4_23__16_33__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_4_23__16_33__Changes_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_4_23__16_36__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_4_23__16_36__Changes_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_4_23__16_48__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_4_23__16_48__Changes_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_4_23__17_58__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_4_23__17_58__Changes_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_4_23__18_15__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_4_23__18_15__Changes_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/medCheck/dao/impl/DoctorServiceImplDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/medCheck/dao/impl/DoctorServiceImplDao.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+@@ -31,7 +22,7 @@
+   <component name="Git.Settings">
+     <option name="RECENT_BRANCH_BY_REPOSITORY">
+       <map>
+-        <entry key="$PROJECT_DIR$" value="master" />
++        <entry key="$PROJECT_DIR$" value="refactor/add_function_all_methods" />
+       </map>
+     </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+@@ -50,7 +41,7 @@
+     "RunOnceActivity.OpenProjectViewOnStart": "true",
+     "RunOnceActivity.ShowReadmeOnStart": "true",
+     "WebServerToolWindowFactoryState": "false",
+-    "git-widget-placeholder": "feature/add__function",
++    "git-widget-placeholder": "master",
+     "node.js.detected.package.eslint": "true",
+     "node.js.detected.package.tslint": "true",
+     "node.js.selected.package.eslint": "(autodetect)",
