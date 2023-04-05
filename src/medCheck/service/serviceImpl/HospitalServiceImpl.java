@@ -13,36 +13,31 @@ public class HospitalServiceImpl implements HospitalService {
     @Override
     public String addHospital(Hospital hospital) {
         hospitalServiceImplDao.addHospital(hospital);
-        return null;
+        return "has joined!!!";
     }
 
     @Override
     public Hospital findHospitalById(Long id) {
-        hospitalServiceImplDao.findHospitalById(id);
-        return null;
+       return hospitalServiceImplDao.findHospitalById(id);
     }
 
     @Override
     public List<Hospital> getAllHospital() {
-        hospitalServiceImplDao.getAllHospital();
-        return null;
+       return hospitalServiceImplDao.getAllHospital();
     }
 
     @Override
     public List<Patient> getAllPatientFromHospital(Long id) {
-        hospitalServiceImplDao.getAllPatientFromHospital(id);
-        return null;
+       return hospitalServiceImplDao.getAllPatientFromHospital(id);
     }
 
     @Override
     public String deleteHospitalById(Long id) {
-        hospitalServiceImplDao.deleteHospitalById(id);
-        return null;
+        return hospitalServiceImplDao.deleteHospitalById(id);
     }
 
     @Override
     public Map<String, Hospital> getAllHospitalByAddress(String address) {
-        hospitalServiceImplDao.getAllHospitalByAddress(address);
-        return null;
+       return hospitalServiceImplDao.getAllHospitalByAddress(address);
     }
 }
