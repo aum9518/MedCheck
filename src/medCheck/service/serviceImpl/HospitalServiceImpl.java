@@ -8,8 +8,10 @@ import java.util.List;
 import java.util.Map;
 
 public class HospitalServiceImpl implements HospitalService {
+
     @Override
     public String addHospital(Hospital hospital) {
+
         return null;
     }
 
