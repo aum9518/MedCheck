@@ -6,6 +6,7 @@ import medCheck.model.Hospital;
 import medCheck.service.DepartmentService;
 
 import java.util.List;
+import java.util.Objects;
 
 public class DepartmentServiceImpl implements DepartmentService {
     public String addDepartmentToHospital(Long id, Department department) {
@@ -13,10 +14,10 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public List<Department> getAllDepartmentByHospital(Long id) {
+    public List<Department> getAllDepartmentByHospital(Long id) {//he get all department of hospital
         for (Hospital h : database.getHospitals()
         ) {
-            if (h.getId() == id) {
+            if (Objects.equals(h.getId(), id)) {
                 System.out.println(h.getDepartments());
             } else return null;
         }
@@ -31,7 +32,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public void deleteDepartmentById(Long id) {
+    public void  deleteDepartmentById(Long id) {
 
     }
 
