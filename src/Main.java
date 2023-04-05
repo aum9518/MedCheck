@@ -17,6 +17,9 @@ import medCheck.service.serviceImpl.HospitalServiceImpl;
 
 public class Main {
     public static void main(String[] args) {
+
+        System.out.println("Java");
+
         HospitalServiceImpl hospitalService = new HospitalServiceImpl();
 
         Doctor doctor = new Doctor(1L, "Bektur", "Duyshenbek uulu", Gender.MALE, 3);
@@ -50,11 +53,12 @@ public class Main {
         System.out.println("GET ALL PATIENT FROM HOSPITAL : " + hospitalService.getAllPatientFromHospital(1L)); //GET ALL PATIENT FROM HOSPITAL.
         System.out.println("DELETE HOSPITAL BY ID : " + hospitalService.deleteHospitalById(1L)); //DELETE HOSPITAL BY ID
         System.out.println("GET ALL HOSPITAL BY ADDRESS : " + hospitalService.getAllHospitalByAddress("asdfgh")); //GET ALL HOSPITAL BY ADDRESS.
-=======
+
  master
 
         Hospital hospital = new Hospital(1L, "City Clinical Hospital No. 1", "Bishkek, st. Fuchika, 15", departments, doctors, patients);
         Hospital hospital1 = new Hospital(2L, "Republican Hospital No. 2", "Bishkek, st. Kyiv, 110", departments1, doctors1, patients1);
+
 
         System.out.println(hospitalService.addHospital(hospital)); //TO ADD HOSPITAL.
         System.out.println("FIND HOSPITAL BY ID : " + hospitalService.findHospitalById(1L)); //FIND HOSPITAL BY ID.
