@@ -10,6 +10,8 @@ import java.util.List;
 
 import medCheck.enums.Gender;
 import medCheck.model.Doctor;
+import medCheck.service.DepartmentService;
+import medCheck.service.serviceImpl.DepartmentServiceImpl;
 import medCheck.service.serviceImpl.DoctorServiceImpl;
 import medCheck.service.serviceImpl.HospitalServiceImpl;
 
@@ -37,6 +39,19 @@ public class Main {
         Patient patient3 = new Patient(4L, "Kanymgul", "Abdutairovna", 20, Gender.FEMALE);
         List<Patient> patients = new ArrayList<>(List.of(patient, patient1));
         List<Patient> patients1 = new ArrayList<>(List.of(patient2, patient3));
+ Feature/WritingSenondMethod
+
+        Hospital hospital = new Hospital(1L, "City Clinical Hospital No. 1", "Bishkek, st. Fuchika, 15", departments, doctors, patients);
+        Hospital hospital1 = new Hospital(2L, "Republican Hospital No. 2", "Bishkek, st. Kyiv, 110", departments1, doctors1, patients1);
+
+        System.out.println(hospitalService.addHospital(hospital)); //TO ADD HOSPITAL.
+        System.out.println("FIND HOSPITAL BY ID : " + hospitalService.findHospitalById(1L)); //FIND HOSPITAL BY ID.
+        System.out.println("GET ALL HOSPITAL : " + hospitalService.getAllHospital()); //GET ALL HOSPITAL.
+        System.out.println("GET ALL PATIENT FROM HOSPITAL : " + hospitalService.getAllPatientFromHospital(1L)); //GET ALL PATIENT FROM HOSPITAL.
+        System.out.println("DELETE HOSPITAL BY ID : " + hospitalService.deleteHospitalById(1L)); //DELETE HOSPITAL BY ID
+        System.out.println("GET ALL HOSPITAL BY ADDRESS : " + hospitalService.getAllHospitalByAddress("asdfgh")); //GET ALL HOSPITAL BY ADDRESS.
+=======
+ master
 
         Hospital hospital = new Hospital(1L, "City Clinical Hospital No. 1", "Bishkek, st. Fuchika, 15", departments, doctors, patients);
         Hospital hospital1 = new Hospital(2L, "Republican Hospital No. 2", "Bishkek, st. Kyiv, 110", departments1, doctors1, patients1);
