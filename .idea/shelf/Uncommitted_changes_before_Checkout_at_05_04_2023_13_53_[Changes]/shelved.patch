@@ -1,0 +1,93 @@
+Index: src/medCheck/dao/impl/DoctorServiceImplDao.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package medCheck.dao.impl;\r\n\r\nimport medCheck.dao.DepartmentServiceDao;\r\nimport medCheck.dao.DoctorServiceDao;\r\nimport medCheck.dao.HospitalServiceDao;\r\nimport medCheck.database.Database;\r\nimport medCheck.model.Department;\r\nimport medCheck.model.Doctor;\r\nimport medCheck.model.Hospital;\r\nimport medCheck.service.DepartmentService;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\nimport java.util.Map;\r\nimport java.util.stream.Collectors;\r\n\r\n\r\npublic class DoctorServiceImplDao implements DoctorServiceDao {\r\n\r\n\r\n    Database database = new Database();\r\n    List<Hospital>hospitals;\r\n    Map<Long,Doctor>doctors;\r\n\r\n    @Override\r\n    public String addDoctorToHospital(Long id, Doctor doctor) {\r\n        Hospital hospital = database.getHospitals().stream()\r\n                .filter(h -> h.getId().equals(id))\r\n                .findFirst()\r\n                .orElse(null);\r\n        if (hospital == null) {\r\n            return \"Hospital not found!\";\r\n        }\r\n        doctor.setId(doctor.getId());\r\n        hospital.getDoctors().add(doctor);\r\n        doctors.put(doctor.getId(), doctor);\r\n        return \"Doctor added to hospital successfully.\";\r\n    }\r\n\r\n    @Override\r\n    public Doctor findDoctorById(Long id) {\r\n        return doctors.get(id);\r\n    }\r\n\r\n    @Override\r\n    public String updateDoctor(Long id, Doctor doctor) {\r\n        if (!doctors.containsKey(id)) {\r\n            return \"Doctor not found!\";\r\n        }\r\n        doctor.setId(id);\r\n        doctors.put(id, doctor);\r\n        return \"Doctor updated successfully.\";\r\n    }\r\n\r\n    @Override\r\n    public void deleteDoctorById(Long id) {\r\n        doctors.remove(id);\r\n        database.getHospitals().stream()\r\n                .flatMap(h -> h.getDepartments().stream())\r\n                .forEach(d -> d.getDoctors().removeIf(doc -> doc.getId().equals(id)));\r\n\r\n    }\r\n\r\n    @Override\r\n    public String assignDoctorToDepartment(Long departmentId, List<Long> doctorsId) {\r\n        Department department = database.getHospitals().stream()\r\n                .flatMap(h -> h.getDepartments().stream())\r\n                .filter(d -> d.getId().equals(departmentId))\r\n                .findFirst()\r\n                .orElse(null);\r\n        if (department == null) {\r\n            return \"Department not found!\";\r\n        }\r\n        List<Doctor> doctorsToAdd = doctorsId.stream()\r\n                .map(doctorId -> doctors.get(doctorId))\r\n                .toList();\r\n        department.getDoctors().addAll(doctorsToAdd);\r\n        return \"Doctors assigned to department successfully.\";\r\n    }\r\n\r\n    @Override\r\n    public List<Doctor> getAllDoctorsByHospitalId(Long id) {\r\n        return database.getHospitals().stream()\r\n                .filter(h -> h.getId().equals(id))\r\n                .flatMap(h -> h.getDoctors().stream())\r\n                .collect(Collectors.toList());\r\n    }\r\n\r\n    @Override\r\n    public List<Doctor> getAllDoctorsByDepartmentId(Long id) {\r\n\r\n        return database.getHospitals().stream()\r\n                .flatMap(h -> h.getDepartments().stream())\r\n                .filter(d -> d.getId().equals(id))\r\n                .flatMap(d -> d.getDoctors().stream())\r\n                .collect(Collectors.toList());\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/medCheck/dao/impl/DoctorServiceImplDao.java b/src/medCheck/dao/impl/DoctorServiceImplDao.java
+--- a/src/medCheck/dao/impl/DoctorServiceImplDao.java	(revision be34dbadebad92761734d573b5ce3bca6b7de09a)
++++ b/src/medCheck/dao/impl/DoctorServiceImplDao.java	(date 1680681214697)
+@@ -16,11 +16,9 @@
+ 
+ 
+ public class DoctorServiceImplDao implements DoctorServiceDao {
+-
+-
+     Database database = new Database();
+-    List<Hospital>hospitals;
+-    Map<Long,Doctor>doctors;
++    List<Hospital> hospitals;
++    Map<Long, Doctor> doctors;
+ 
+     @Override
+     public String addDoctorToHospital(Long id, Doctor doctor) {
+@@ -39,60 +37,33 @@
+ 
+     @Override
+     public Doctor findDoctorById(Long id) {
+-        return doctors.get(id);
++        return null;
+     }
+ 
+     @Override
+     public String updateDoctor(Long id, Doctor doctor) {
+-        if (!doctors.containsKey(id)) {
+-            return "Doctor not found!";
+-        }
+-        doctor.setId(id);
+-        doctors.put(id, doctor);
+-        return "Doctor updated successfully.";
++        return null;
+     }
+ 
+     @Override
+     public void deleteDoctorById(Long id) {
+-        doctors.remove(id);
+-        database.getHospitals().stream()
+-                .flatMap(h -> h.getDepartments().stream())
+-                .forEach(d -> d.getDoctors().removeIf(doc -> doc.getId().equals(id)));
++
+ 
+     }
+ 
+     @Override
+     public String assignDoctorToDepartment(Long departmentId, List<Long> doctorsId) {
+-        Department department = database.getHospitals().stream()
+-                .flatMap(h -> h.getDepartments().stream())
+-                .filter(d -> d.getId().equals(departmentId))
+-                .findFirst()
+-                .orElse(null);
+-        if (department == null) {
+-            return "Department not found!";
+-        }
+-        List<Doctor> doctorsToAdd = doctorsId.stream()
+-                .map(doctorId -> doctors.get(doctorId))
+-                .toList();
+-        department.getDoctors().addAll(doctorsToAdd);
+-        return "Doctors assigned to department successfully.";
++        return null;
+     }
+ 
+     @Override
+     public List<Doctor> getAllDoctorsByHospitalId(Long id) {
+-        return database.getHospitals().stream()
+-                .filter(h -> h.getId().equals(id))
+-                .flatMap(h -> h.getDoctors().stream())
+-                .collect(Collectors.toList());
++        return null;
+     }
+ 
+     @Override
+     public List<Doctor> getAllDoctorsByDepartmentId(Long id) {
+ 
+-        return database.getHospitals().stream()
+-                .flatMap(h -> h.getDepartments().stream())
+-                .filter(d -> d.getId().equals(id))
+-                .flatMap(d -> d.getDoctors().stream())
+-                .collect(Collectors.toList());
++        return null;
+     }
+-}
++}
+\ No newline at end of file
