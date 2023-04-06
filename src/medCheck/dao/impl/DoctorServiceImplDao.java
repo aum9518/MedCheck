@@ -18,11 +18,11 @@ import java.util.stream.Collectors;
 
 public class DoctorServiceImplDao implements DoctorServiceDao {
 
-    Department department1 = new Department(1L, "rtgdfgdf", new ArrayList<>(Arrays.asList(new Doctor(1L, "Amir", "Mirlanov", Gender.FEMALE, 1))));
-    List<Department> depart = new ArrayList<>(Arrays.asList(department1));
-    Hospital hospital1 = new Hospital(2L, "Republican Hospital No. 2", "Bishkek, st. Kyiv, 110", depart, new ArrayList<>(), new ArrayList<>());
-    List<Hospital> hospitals = new ArrayList<>(Arrays.asList(hospital1));
-    Database database = new Database(hospitals);
+  private Database database = new Database();
+
+    public DoctorServiceImplDao(Database database) {
+        this.database = database;
+    }
 
     @Override
     public String addDoctorToHospital(Long id, Doctor doctor) {
@@ -40,7 +40,7 @@ public class DoctorServiceImplDao implements DoctorServiceDao {
     public Doctor findDoctorById(Long id) {
         for (Hospital h : database.getHospitals()) {
             for (Doctor d : h.getDoctors()) {
-                if (d.getId() == id) {
+                if (d.getId().equals(id)) {
                     return d;
                 }
             }
@@ -52,9 +52,11 @@ public class DoctorServiceImplDao implements DoctorServiceDao {
     public String updateDoctor(Long id, Doctor doctor) {
         for (Hospital h : database.getHospitals()) {
             for (Doctor d : h.getDoctors()) {
-                if (h.getId() == id) {
-                    h.getDoctors().remove(d);
-                    h.getDoctors().add(doctor);
+                if (d.getId() == id) {
+                    d.setFirstName(doctor.getFirstName());
+
+//                    h.getDoctors().remove(d);
+//                    h.getDoctors().add(doctor);
                     return "Doctor updated successfully." + doctor;
                 }
             }
@@ -93,6 +95,7 @@ public class DoctorServiceImplDao implements DoctorServiceDao {
             for (Department d : h.getDepartments()) {
                 for (Doctor o : h.getDoctors()) {
                     if (d.getId() == departmentId) {
+
                         doctorsId.add(o.getId());
                         return "Doctor id added successfully" + doctorsId;
                     }

@@ -11,10 +11,12 @@ import java.util.List;
 import java.util.Map;
 
 public class PatientServiceImpl implements PatientService {
-    Database database=new Database();
+  private Database database = new Database();
+    public PatientServiceImpl(Database database) {
+        this.database = database;
+    }
 
-
-    PatientServiceImplDao patientServiceImplDao = new PatientServiceImplDao();
+    PatientServiceImplDao patientServiceImplDao = new PatientServiceImplDao(database);
 
     @Override
     public String addPatientToHospital(Long id, Patient patient) {

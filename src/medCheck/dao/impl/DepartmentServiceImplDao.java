@@ -10,9 +10,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
     public class DepartmentServiceImplDao implements DepartmentServiceDao {
-        Hospital hospital1 = new Hospital(2L, "Republican Hospital No. 2", "Bishkek, st. Kyiv, 110", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        List<Hospital> hospitals = new ArrayList<>(Arrays.asList(hospital1));
-        Database database = new Database(hospitals);
+
+     private Database database = new Database();
+
+        public DepartmentServiceImplDao(Database database) {
+            this.database = database;
+        }
 
         @Override
         public String addDepartmentToHospital(Long id, Department department) {

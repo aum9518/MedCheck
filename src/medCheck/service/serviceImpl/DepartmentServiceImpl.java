@@ -11,7 +11,13 @@ import java.util.List;
 import java.util.Objects;
 
 public class DepartmentServiceImpl implements DepartmentService {
-    DepartmentServiceImplDao departmentServiceImplDao = new DepartmentServiceImplDao();
+    private Database database = new Database();
+
+    public DepartmentServiceImpl(Database database) {
+        this.database = database;
+    }
+
+    DepartmentServiceImplDao departmentServiceImplDao = new DepartmentServiceImplDao(database);
 
     @Override
     public String addDepartmentToHospital(Long id, Department department){

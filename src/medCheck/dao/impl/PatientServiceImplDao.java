@@ -11,10 +11,11 @@ import java.util.stream.Collectors;
 
 
 public class PatientServiceImplDao implements PatientServiceDao {
-    Hospital hospital = new Hospital(1L, "City Clinical Hospital No. 1", "Bishkek, st. Fuchika, 15", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-    List<Hospital>hospitals= new ArrayList<>(Arrays.asList(hospital));
+    private Database database = new Database();
 
-    Database database = new Database(hospitals);
+    public PatientServiceImplDao(Database database) {
+        this.database = database;
+    }
 
     @Override
     public String addPatientToHospital(Long id, Patient patient) {
@@ -132,7 +133,6 @@ public class PatientServiceImplDao implements PatientServiceDao {
         /*Map<Integer,Patient>patientMap = new HashMap<>();
             List<Hospital>hospitals = database.getHospitals().stream().toList();
            List<List<Patient>>patients= hospitals.stream().map(Hospital::getPatients).toList();
-
         for (List<Patient> p:patients) {
             for (Patient a:p) {
                 patientMap.put(a.getAge(),a);
