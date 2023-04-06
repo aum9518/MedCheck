@@ -15,14 +15,29 @@ public class HospitalServiceImplDao implements HospitalServiceDao {
     @Override
     public String addHospital(Hospital hospital) {
         database.getHospitals().add(hospital);
-        return null;
+        return "has joined!!!";
     }
 
     @Override
     public Hospital findHospitalById(Long id) {
-        List<Hospital> list = database.getHospitals().stream().filter(x -> x.getId() == id).collect(Collectors.toList());
-        return list.get(0);
-    }
+        boolean isTrue = true;
+        for (Hospital d : database.getHospitals()) {
+            if (Objects.equals(d.getId(), id)) {
+                isTrue = true;
+                return d;
+            } else {
+                isTrue = false;
+            }
+        }
+            try {
+                if (!isTrue) {
+                    throw new MyException("Hospital with id: " + id + " not found!");
+                }
+    }catch (MyException e) {
+            System.out.println(e.getMessage());
+        }
+            return null;
+        }
 
     @Override
     public List<Hospital> getAllHospital() {
@@ -31,21 +46,49 @@ public class HospitalServiceImplDao implements HospitalServiceDao {
 
     @Override
     public List<Patient> getAllPatientFromHospital(Long id) {
-        List<Hospital> hospitals = database.getHospitals().stream().filter(x -> x.getId() == id).toList();
-        return hospitals.get(0).getPatients();
+        boolean isTrue = true;
+        for (Hospital d : database.getHospitals()) {
+            for (Patient p : d.getPatients()) {
+                if (Objects.equals(d.getId(), id)) {
+                    isTrue = true;
+                    return d.getPatients();
+                } else {
+                    isTrue = false;
+                }
+            }
+            try {
+                if (!isTrue) {
+                    throw new MyException("Hospital with id: " + id + " not found!");
+                }
+            } catch (MyException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return null;
     }
 
     @Override
     public String deleteHospitalById(Long id) {
+        boolean isTrue = true;
         synchronized (database.getHospitals()) {
             Iterator<Hospital> iterator = database.getHospitals().iterator();
             while (iterator.hasNext()) {
                 Hospital h = iterator.next();
                 if (h.getId() == id) {
+                    isTrue = true;
                     iterator.remove();
                     return "successfully fired!!!";
+                } else {
+                    isTrue = false;
                 }
             }
+        }
+        try {
+            if (!isTrue) {
+                throw new MyException("Hospital with id: " + id + " not found!");
+            }
+        } catch (MyException e) {
+            System.out.println(e.getMessage());
         }
         return null;
     }
