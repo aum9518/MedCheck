@@ -26,17 +26,9 @@ import medCheck.service.serviceImpl.HospitalServiceImpl;
 import medCheck.service.serviceImpl.PatientServiceImpl;
 
 public class Main {
+    //List<Hospital>hospitals = new ArrayList<>();
 
     public static void main(String[] args){
-        List<Hospital>hospitals = new ArrayList<>();
-        Database database = new Database(hospitals);
-        PatientServiceImpl servicePatient = new PatientServiceImpl(database);
-        DepartmentServiceImpl departmentService = new DepartmentServiceImpl(database);
-        HospitalServiceImpl hospitalService = new HospitalServiceImpl(database);
-        DoctorServiceImpl doctorService = new DoctorServiceImpl(database);
-
-
-
         Doctor doctor1 = new Doctor(1L, "Bektur", "Duyshenbek uulu", Gender.MALE, 3);
         Doctor doctor2 = new Doctor(2L, "Aizat", "Duisheeva", Gender.FEMALE, 1);
         Doctor doctor3 = new Doctor(3L, "Erkinbek", "Koshaliev", Gender.MALE, 5);
@@ -59,8 +51,11 @@ public class Main {
         List<Patient> patients1 = new ArrayList<>(List.of(patient2, patient3));
 
         Hospital hospital = new Hospital(1L, "City Clinical Hospital No. 1", "Bishkek, st. Fuchika, 15", departments, doctors, patients);
-        Hospital hospital1 = new Hospital(2L, "Republican Hospital No. 2", "Bishkek, st. Kyiv, 110", departments1, doctors1, patients1);
 
+        PatientServiceImpl servicePatient = new PatientServiceImpl(Database.database);
+        DepartmentServiceImpl departmentService = new DepartmentServiceImpl(Database.database);
+        HospitalServiceImpl hospitalService = new HospitalServiceImpl(Database.database);
+        DoctorServiceImpl doctorService = new DoctorServiceImpl(Database.database);
 
         System.out.println(hospitalService.addHospital(hospital)); //TO ADD HOSPITAL.
 
@@ -68,7 +63,7 @@ public class Main {
         System.out.println("GET ALL HOSPITAL : " + hospitalService.getAllHospital()); //GET ALL HOSPITAL.
         System.out.println("GET ALL PATIENT FROM HOSPITAL : " + hospitalService.getAllPatientFromHospital(1L)); //GET ALL PATIENT FROM HOSPITAL.
         System.out.println("GET ALL HOSPITAL BY ADDRESS : " + hospitalService.getAllHospitalByAddress("Bishkek, st. Fuchika, 15")); //GET ALL HOSPITAL BY ADDRESS.
-        System.out.println("DELETE HOSPITAL BY ID : " + hospitalService.deleteHospitalById(1L)); //DELETE HOSPITAL BY ID
+       // System.out.println("DELETE HOSPITAL BY ID : " + hospitalService.deleteHospitalById(1L)); //DELETE HOSPITAL BY ID
 
 
 
@@ -87,17 +82,6 @@ public class Main {
         doctorService.deleteDoctorById(3L);
         System.out.println("==================================================");
 
-
-
-
-
-
-        System.out.println(hospitalService.addHospital(hospital)); //TO ADD HOSPITAL.
-        System.out.println("FIND HOSPITAL BY ID : " + hospitalService.findHospitalById(1L)); //FIND HOSPITAL BY ID.
-        System.out.println("GET ALL HOSPITAL : " + hospitalService.getAllHospital()); //GET ALL HOSPITAL.
-        System.out.println("GET ALL PATIENT FROM HOSPITAL : " + hospitalService.getAllPatientFromHospital(1L)); //GET ALL PATIENT FROM HOSPITAL.
-        System.out.println("GET ALL HOSPITAL BY ADDRESS : " + hospitalService.getAllHospitalByAddress("Bishkek, st. Fuchika, 15")); //GET ALL HOSPITAL BY ADDRESS.
-        System.out.println("DELETE HOSPITAL BY ID : " + hospitalService.deleteHospitalById(1L)); //DELETE HOSPITAL BY ID
 
         System.out.println("Add patient to Hospital: "+servicePatient.addPatientToHospital(1L, patient2));
         System.out.println("Add list of patient: "+servicePatient.addPatientsToHospital(1L, patients1));

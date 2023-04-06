@@ -13,7 +13,7 @@ import java.util.Map;
 public class PatientServiceImpl implements PatientService {
   private Database database = new Database();
     public PatientServiceImpl(Database database) {
-        this.database = database;
+        this.database = new Database(new ArrayList<>());
     }
 
     PatientServiceImplDao patientServiceImplDao = new PatientServiceImplDao(database);
