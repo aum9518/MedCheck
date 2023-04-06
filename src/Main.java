@@ -35,6 +35,12 @@ public class Main {
         Department department3 = new Department(4L, "Operation theater complex (OT)", doctors1);
         List<Department> departments = new ArrayList<>(List.of(department, department1));
         List<Department> departments1 = new ArrayList<>(List.of(department2, department3));
+department.getDepartmentName();
+
+
+
+
+
 
         Patient patient = new Patient(1L, "Manas", "Abdugani uulu", 20, Gender.MALE);
         Patient patient1 = new Patient(2L, "Aigerim", "Bektenova", 18, Gender.FEMALE);
@@ -42,7 +48,7 @@ public class Main {
         Patient patient3 = new Patient(4L, "Kanymgul", "Abdutairovna", 20, Gender.FEMALE);
         List<Patient> patients = new ArrayList<>(List.of(patient, patient1));
         List<Patient> patients1 = new ArrayList<>(List.of(patient2, patient3));
- Feature/WritingSenondMethod
+
 
         Hospital hospital = new Hospital(1L, "City Clinical Hospital No. 1", "Bishkek, st. Fuchika, 15", departments, doctors, patients);
         Hospital hospital1 = new Hospital(2L, "Republican Hospital No. 2", "Bishkek, st. Kyiv, 110", departments1, doctors1, patients1);
@@ -54,17 +60,13 @@ public class Main {
         System.out.println("DELETE HOSPITAL BY ID : " + hospitalService.deleteHospitalById(1L)); //DELETE HOSPITAL BY ID
         System.out.println("GET ALL HOSPITAL BY ADDRESS : " + hospitalService.getAllHospitalByAddress("asdfgh")); //GET ALL HOSPITAL BY ADDRESS.
 
- master
-
-        Hospital hospital = new Hospital(1L, "City Clinical Hospital No. 1", "Bishkek, st. Fuchika, 15", departments, doctors, patients);
-        Hospital hospital1 = new Hospital(2L, "Republican Hospital No. 2", "Bishkek, st. Kyiv, 110", departments1, doctors1, patients1);
-
-
         System.out.println(hospitalService.addHospital(hospital)); //TO ADD HOSPITAL.
         System.out.println("FIND HOSPITAL BY ID : " + hospitalService.findHospitalById(1L)); //FIND HOSPITAL BY ID.
         System.out.println("GET ALL HOSPITAL : " + hospitalService.getAllHospital()); //GET ALL HOSPITAL.
         System.out.println("GET ALL PATIENT FROM HOSPITAL : " + hospitalService.getAllPatientFromHospital(1L)); //GET ALL PATIENT FROM HOSPITAL.
         System.out.println("DELETE HOSPITAL BY ID : " + hospitalService.deleteHospitalById(1L)); //DELETE HOSPITAL BY ID
         System.out.println("GET ALL HOSPITAL BY ADDRESS : " + hospitalService.getAllHospitalByAddress("asdfgh")); //GET ALL HOSPITAL BY ADDRESS.
+
+
     }
 }
