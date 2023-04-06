@@ -1,13 +1,20 @@
 package medCheck.service.serviceImpl;
 
 import medCheck.dao.impl.DoctorServiceImplDao;
+import medCheck.database.Database;
 import medCheck.model.Doctor;
 import medCheck.service.DoctorService;
 
 import java.util.List;
 
 public class DoctorServiceImpl implements DoctorService {
-    DoctorServiceImplDao doctorServiceImplDao = new DoctorServiceImplDao();
+    private Database database = new Database();
+
+    public DoctorServiceImpl(Database database) {
+        this.database = database;
+    }
+
+    DoctorServiceImplDao doctorServiceImplDao = new DoctorServiceImplDao(database);
     @Override
     public String addDoctorToHospital(Long id, Doctor doctor) {
 
