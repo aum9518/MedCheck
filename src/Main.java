@@ -1,4 +1,8 @@
+
+import medCheck.dao.impl.DoctorServiceImplDao;
+
 import medCheck.dao.impl.DepartmentServiceImplDao;
+
 import medCheck.dao.impl.HospitalServiceImplDao;
 import medCheck.database.Database;
 import medCheck.enums.Gender;
@@ -10,6 +14,7 @@ import medCheck.model.Patient;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import medCheck.enums.Gender;
 import medCheck.model.Doctor;
@@ -26,13 +31,21 @@ public class Main {
         DepartmentServiceImpl departmentService = new DepartmentServiceImpl();
 
         HospitalServiceImpl hospitalService = new HospitalServiceImpl();
+        DoctorServiceImpl doctorService = new DoctorServiceImpl();
+        DoctorServiceImplDao doctorServiceImplDao= new  DoctorServiceImplDao();
 
-        Doctor doctor = new Doctor(1L, "Bektur", "Duyshenbek uulu", Gender.MALE, 3);
-        Doctor doctor1 = new Doctor(2L, "Aizat", "Duisheeva", Gender.FEMALE, 1);
-        Doctor doctor2 = new Doctor(3L, "Erkinbek", "Koshaliev", Gender.MALE, 5);
-        Doctor doctor3 = new Doctor(4L, "Ernazar", "Asanbekov", Gender.MALE, 2);
-        List<Doctor> doctors = new ArrayList<>(List.of(doctor, doctor1));
+
+        Doctor doctor1 = new Doctor(1L, "Bektur", "Duyshenbek uulu", Gender.MALE, 3);
+        Doctor doctor2 = new Doctor(2L, "Aizat", "Duisheeva", Gender.FEMALE, 1);
+        Doctor doctor3 = new Doctor(3L, "Erkinbek", "Koshaliev", Gender.MALE, 5);
+        Doctor doctor4 = new Doctor(4L, "Ernazar", "Asanbekov", Gender.MALE, 2);
+        List<Doctor> doctors = new ArrayList<>(List.of(doctor1, doctor2));
         List<Doctor> doctors1 = new ArrayList<>(List.of(doctor2, doctor3));
+
+
+
+
+
 
         Department department = new Department(1L, "Surgical department", doctors);
         Department department1 = new Department(2L, " Physical medicine", doctors);
@@ -53,6 +66,21 @@ public class Main {
         Hospital hospital1 = new Hospital(2L, "Republican Hospital No. 2", "Bishkek, st. Kyiv, 110", departments1, doctors1, patients1);
 
 
+        System.out.println("ADD DOCTOR TO HOSPITAL: "+doctorService.addDoctorToHospital(2L, doctor1));
+        System.out.println("FIND DOCTOR BY ID: "+doctorService.findDoctorById(1L));
+        System.out.println("UPDATE DOCTOR: "+doctorService.updateDoctor(2L,doctor3));
+        System.out.print("DELETE DOCTOR BY ID: ");
+        doctorService.deleteDoctorById(1L);
+        List<Long>list=new ArrayList<>();
+        System.out.println("\n ASSIGN DOCTOR TO DEPARTMENT: "+doctorService.assignDoctorToDepartment(4L, list));
+        System.out.println("GET ALL DOCTORS BY HOSPITAL ID: "+doctorService.getAllDoctorsByHospitalId(2L));
+        System.out.println("GET ALL DOCTORS BY DEPARTMENT ID: "+doctorService.getAllDoctorsByDepartmentId(1L));
+
+
+
+
+
+
         System.out.println(hospitalService.addHospital(hospital)); //TO ADD HOSPITAL.
         System.out.println("FIND HOSPITAL BY ID : " + hospitalService.findHospitalById(1L)); //FIND HOSPITAL BY ID.
         System.out.println("GET ALL HOSPITAL : " + hospitalService.getAllHospital()); //GET ALL HOSPITAL.
@@ -68,10 +96,23 @@ public class Main {
         System.out.println("Sort patient by age(Ascending/Descending): "+servicePatient.sortPatientsByAge("Descending"));
         servicePatient.removePatientById(4L);
 
+
+        System.out.println(hospitalService.addHospital(hospital)); //TO ADD HOSPITAL.
+        System.out.println("FIND HOSPITAL BY ID : " + hospitalService.findHospitalById(1L)); //FIND HOSPITAL BY ID.
+        System.out.println("GET ALL HOSPITAL : " + hospitalService.getAllHospital()); //GET ALL HOSPITAL.
+        System.out.println("GET ALL PATIENT FROM HOSPITAL : " + hospitalService.getAllPatientFromHospital(1L)); //GET ALL PATIENT FROM HOSPITAL.
+        System.out.println("DELETE HOSPITAL BY ID : " + hospitalService.deleteHospitalById(1L)); //DELETE HOSPITAL BY ID
+        System.out.println("GET ALL HOSPITAL BY ADDRESS : " + hospitalService.getAllHospitalByAddress("asdfgh")); //GET ALL HOSPITAL BY ADDRESS.
+
+
+
+
+
         System.out.println("ADD DEPARTMENT TO HOSPITAL : " + departmentService.addDepartmentToHospital(2L,department2));
         System.out.println("GET ALL DEPARTMENT BY HOSPITAL : " + departmentService.getAllDepartmentByHospital(2L));
         System.out.println("FIND DEPARTMENT BY NAME : " + departmentService.findDepartmentByName("Pharmacy department"));
         System.out.println("UPDATE DEPARTMENT BY ID : " + departmentService.updateDepartmentById(1L,department1));
         departmentService.deleteDepartmentById(3L);
+
     }
 }
