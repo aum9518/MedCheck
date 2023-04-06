@@ -1,6 +1,8 @@
+import medCheck.dao.impl.DepartmentServiceImplDao;
 import medCheck.dao.impl.HospitalServiceImplDao;
 import medCheck.database.Database;
 import medCheck.enums.Gender;
+import medCheck.exception.MyException;
 import medCheck.model.Department;
 import medCheck.model.Doctor;
 import medCheck.model.Hospital;
@@ -18,9 +20,10 @@ import medCheck.service.serviceImpl.HospitalServiceImpl;
 import medCheck.service.serviceImpl.PatientServiceImpl;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws MyException {
         Database database = new Database(new ArrayList<>(new ArrayList<>()));
         PatientServiceImpl servicePatient = new PatientServiceImpl();
+        DepartmentServiceImpl departmentService = new DepartmentServiceImpl();
 
         HospitalServiceImpl hospitalService = new HospitalServiceImpl();
 
@@ -48,12 +51,12 @@ public class Main {
         Hospital hospital = new Hospital(1L, "City Clinical Hospital No. 1", "Bishkek, st. Fuchika, 15", departments, doctors, patients);
         Hospital hospital1 = new Hospital(2L, "Republican Hospital No. 2", "Bishkek, st. Kyiv, 110", departments1, doctors1, patients1);
 
-//        System.out.println(hospitalService.addHospital(hospital)); //TO ADD HOSPITAL.
-//        System.out.println("FIND HOSPITAL BY ID : " + hospitalService.findHospitalById(1L)); //FIND HOSPITAL BY ID.
-//        System.out.println("GET ALL HOSPITAL : " + hospitalService.getAllHospital()); //GET ALL HOSPITAL.
-//        System.out.println("GET ALL PATIENT FROM HOSPITAL : " + hospitalService.getAllPatientFromHospital(1L)); //GET ALL PATIENT FROM HOSPITAL.
-       // System.out.println("DELETE HOSPITAL BY ID : " + hospitalService.deleteHospitalById(1L)); //DELETE HOSPITAL BY ID
-      //  System.out.println("GET ALL HOSPITAL BY ADDRESS : " + hospitalService.getAllHospitalByAddress("asdfgh")); //GET ALL HOSPITAL BY ADDRESS.
+        System.out.println(hospitalService.addHospital(hospital)); //TO ADD HOSPITAL.
+        System.out.println("FIND HOSPITAL BY ID : " + hospitalService.findHospitalById(1L)); //FIND HOSPITAL BY ID.
+        System.out.println("GET ALL HOSPITAL : " + hospitalService.getAllHospital()); //GET ALL HOSPITAL.
+        System.out.println("GET ALL PATIENT FROM HOSPITAL : " + hospitalService.getAllPatientFromHospital(1L)); //GET ALL PATIENT FROM HOSPITAL.
+        System.out.println("DELETE HOSPITAL BY ID : " + hospitalService.deleteHospitalById(1L)); //DELETE HOSPITAL BY ID
+        System.out.println("GET ALL HOSPITAL BY ADDRESS : " + hospitalService.getAllHospitalByAddress("asdfgh")); //GET ALL HOSPITAL BY ADDRESS.
 
         System.out.println("Add patient to Hospital: "+servicePatient.addPatientToHospital(1L, patient2));
         System.out.println("Add list of patient: "+servicePatient.addPatientsToHospital(1L, patients1));
@@ -62,5 +65,11 @@ public class Main {
         System.out.println("Update patient by id: "+servicePatient.updatePatientById(3L, patient1));
         System.out.println("Sort patient by age(Ascending/Descending): "+servicePatient.sortPatientsByAge("Descending"));
         servicePatient.removePatientById(4L);
+
+        System.out.println("ADD DEPARTMENT TO HOSPITAL : " + departmentService.addDepartmentToHospital(2L,department2));
+        System.out.println("GET ALL DEPARTMENT BY HOSPITAL : " + departmentService.getAllDepartmentByHospital(2L));
+        System.out.println("FIND DEPARTMENT BY NAME : " + departmentService.findDepartmentByName("Pharmacy department"));
+        System.out.println("UPDATE DEPARTMENT BY ID : " + departmentService.updateDepartmentById(1L,department1));
+        departmentService.deleteDepartmentById(3L);
     }
 }
