@@ -1,0 +1,257 @@
+Index: src/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import medCheck.dao.impl.HospitalServiceImplDao;\r\nimport medCheck.enums.Gender;\r\nimport medCheck.model.Department;\r\nimport medCheck.model.Doctor;\r\nimport medCheck.model.Hospital;\r\nimport medCheck.model.Patient;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\nimport medCheck.enums.Gender;\r\nimport medCheck.model.Doctor;\r\nimport medCheck.service.DepartmentService;\r\nimport medCheck.service.serviceImpl.DepartmentServiceImpl;\r\nimport medCheck.service.serviceImpl.DoctorServiceImpl;\r\nimport medCheck.service.serviceImpl.HospitalServiceImpl;\r\n\r\npublic class Main {\r\n    public static void main(String[] args) {\r\n\r\n        System.out.println(\"Java\");\r\n\r\n        HospitalServiceImpl hospitalService = new HospitalServiceImpl();\r\n\r\n        Doctor doctor = new Doctor(1L, \"Bektur\", \"Duyshenbek uulu\", Gender.MALE, 3);\r\n        Doctor doctor1 = new Doctor(2L, \"Aizat\", \"Duisheeva\", Gender.FEMALE, 1);\r\n        Doctor doctor2 = new Doctor(3L, \"Erkinbek\", \"Koshaliev\", Gender.MALE, 5);\r\n        Doctor doctor3 = new Doctor(4L, \"Ernazar\", \"Asanbekov\", Gender.MALE, 2);\r\n        List<Doctor> doctors = new ArrayList<>(List.of(doctor, doctor1));\r\n        List<Doctor> doctors1 = new ArrayList<>(List.of(doctor2, doctor3));\r\n\r\n        Department department = new Department(1L, \"Surgical department\", doctors);\r\n        Department department1 = new Department(2L, \" Physical medicine\", doctors);\r\n        Department department2 = new Department(3L, \"Pharmacy department\", doctors1);\r\n        Department department3 = new Department(4L, \"Operation theater complex (OT)\", doctors1);\r\n        List<Department> departments = new ArrayList<>(List.of(department, department1));\r\n        List<Department> departments1 = new ArrayList<>(List.of(department2, department3));\r\n\r\n        Patient patient = new Patient(1L, \"Manas\", \"Abdugani uulu\", 20, Gender.MALE);\r\n        Patient patient1 = new Patient(2L, \"Aigerim\", \"Bektenova\", 18, Gender.FEMALE);\r\n        Patient patient2 = new Patient(3L, \"Baytik\", \"Taalaiibekov\", 23, Gender.MALE);\r\n        Patient patient3 = new Patient(4L, \"Kanymgul\", \"Abdutairovna\", 20, Gender.FEMALE);\r\n        List<Patient> patients = new ArrayList<>(List.of(patient, patient1));\r\n        List<Patient> patients1 = new ArrayList<>(List.of(patient2, patient3));\r\n Feature/WritingSenondMethod\r\n\r\n        Hospital hospital = new Hospital(1L, \"City Clinical Hospital No. 1\", \"Bishkek, st. Fuchika, 15\", departments, doctors, patients);\r\n        Hospital hospital1 = new Hospital(2L, \"Republican Hospital No. 2\", \"Bishkek, st. Kyiv, 110\", departments1, doctors1, patients1);\r\n\r\n        System.out.println(hospitalService.addHospital(hospital)); //TO ADD HOSPITAL.\r\n        System.out.println(\"FIND HOSPITAL BY ID : \" + hospitalService.findHospitalById(1L)); //FIND HOSPITAL BY ID.\r\n        System.out.println(\"GET ALL HOSPITAL : \" + hospitalService.getAllHospital()); //GET ALL HOSPITAL.\r\n        System.out.println(\"GET ALL PATIENT FROM HOSPITAL : \" + hospitalService.getAllPatientFromHospital(1L)); //GET ALL PATIENT FROM HOSPITAL.\r\n        System.out.println(\"DELETE HOSPITAL BY ID : \" + hospitalService.deleteHospitalById(1L)); //DELETE HOSPITAL BY ID\r\n        System.out.println(\"GET ALL HOSPITAL BY ADDRESS : \" + hospitalService.getAllHospitalByAddress(\"asdfgh\")); //GET ALL HOSPITAL BY ADDRESS.\r\n\r\n master\r\n\r\n        Hospital hospital = new Hospital(1L, \"City Clinical Hospital No. 1\", \"Bishkek, st. Fuchika, 15\", departments, doctors, patients);\r\n        Hospital hospital1 = new Hospital(2L, \"Republican Hospital No. 2\", \"Bishkek, st. Kyiv, 110\", departments1, doctors1, patients1);\r\n\r\n\r\n        System.out.println(hospitalService.addHospital(hospital)); //TO ADD HOSPITAL.\r\n        System.out.println(\"FIND HOSPITAL BY ID : \" + hospitalService.findHospitalById(1L)); //FIND HOSPITAL BY ID.\r\n        System.out.println(\"GET ALL HOSPITAL : \" + hospitalService.getAllHospital()); //GET ALL HOSPITAL.\r\n        System.out.println(\"GET ALL PATIENT FROM HOSPITAL : \" + hospitalService.getAllPatientFromHospital(1L)); //GET ALL PATIENT FROM HOSPITAL.\r\n        System.out.println(\"DELETE HOSPITAL BY ID : \" + hospitalService.deleteHospitalById(1L)); //DELETE HOSPITAL BY ID\r\n        System.out.println(\"GET ALL HOSPITAL BY ADDRESS : \" + hospitalService.getAllHospitalByAddress(\"asdfgh\")); //GET ALL HOSPITAL BY ADDRESS.\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Main.java b/src/Main.java
+--- a/src/Main.java	(revision 6da9eb8f64674b3478648d4c37da7cb0c635dd70)
++++ b/src/Main.java	(date 1680710325046)
+@@ -7,6 +7,7 @@
+ 
+ import java.util.ArrayList;
+ import java.util.List;
++import java.util.Scanner;
+ 
+ import medCheck.enums.Gender;
+ import medCheck.model.Doctor;
+@@ -21,6 +22,7 @@
+         System.out.println("Java");
+ 
+         HospitalServiceImpl hospitalService = new HospitalServiceImpl();
++        DoctorServiceImpl doctorService = new DoctorServiceImpl();
+ 
+         Doctor doctor = new Doctor(1L, "Bektur", "Duyshenbek uulu", Gender.MALE, 3);
+         Doctor doctor1 = new Doctor(2L, "Aizat", "Duisheeva", Gender.FEMALE, 1);
+@@ -29,6 +31,16 @@
+         List<Doctor> doctors = new ArrayList<>(List.of(doctor, doctor1));
+         List<Doctor> doctors1 = new ArrayList<>(List.of(doctor2, doctor3));
+ 
++        System.out.println("""
++                1.Add Doctor to Hospital
++                """);
++        int choice=new Scanner(System.in).nextInt();
++        switch (choice){
++            case 1->{
++                doctorService.addDoctorToHospital(1L,doctor);
++            }
++        }
++
+         Department department = new Department(1L, "Surgical department", doctors);
+         Department department1 = new Department(2L, " Physical medicine", doctors);
+         Department department2 = new Department(3L, "Pharmacy department", doctors1);
+@@ -42,29 +54,29 @@
+         Patient patient3 = new Patient(4L, "Kanymgul", "Abdutairovna", 20, Gender.FEMALE);
+         List<Patient> patients = new ArrayList<>(List.of(patient, patient1));
+         List<Patient> patients1 = new ArrayList<>(List.of(patient2, patient3));
+- Feature/WritingSenondMethod
+-
+-        Hospital hospital = new Hospital(1L, "City Clinical Hospital No. 1", "Bishkek, st. Fuchika, 15", departments, doctors, patients);
+-        Hospital hospital1 = new Hospital(2L, "Republican Hospital No. 2", "Bishkek, st. Kyiv, 110", departments1, doctors1, patients1);
+-
+-        System.out.println(hospitalService.addHospital(hospital)); //TO ADD HOSPITAL.
+-        System.out.println("FIND HOSPITAL BY ID : " + hospitalService.findHospitalById(1L)); //FIND HOSPITAL BY ID.
+-        System.out.println("GET ALL HOSPITAL : " + hospitalService.getAllHospital()); //GET ALL HOSPITAL.
+-        System.out.println("GET ALL PATIENT FROM HOSPITAL : " + hospitalService.getAllPatientFromHospital(1L)); //GET ALL PATIENT FROM HOSPITAL.
+-        System.out.println("DELETE HOSPITAL BY ID : " + hospitalService.deleteHospitalById(1L)); //DELETE HOSPITAL BY ID
+-        System.out.println("GET ALL HOSPITAL BY ADDRESS : " + hospitalService.getAllHospitalByAddress("asdfgh")); //GET ALL HOSPITAL BY ADDRESS.
+-
+- master
++// Feature/WritingSenondMethod
+ 
+         Hospital hospital = new Hospital(1L, "City Clinical Hospital No. 1", "Bishkek, st. Fuchika, 15", departments, doctors, patients);
+         Hospital hospital1 = new Hospital(2L, "Republican Hospital No. 2", "Bishkek, st. Kyiv, 110", departments1, doctors1, patients1);
+ 
+-
+         System.out.println(hospitalService.addHospital(hospital)); //TO ADD HOSPITAL.
+         System.out.println("FIND HOSPITAL BY ID : " + hospitalService.findHospitalById(1L)); //FIND HOSPITAL BY ID.
+         System.out.println("GET ALL HOSPITAL : " + hospitalService.getAllHospital()); //GET ALL HOSPITAL.
+         System.out.println("GET ALL PATIENT FROM HOSPITAL : " + hospitalService.getAllPatientFromHospital(1L)); //GET ALL PATIENT FROM HOSPITAL.
+         System.out.println("DELETE HOSPITAL BY ID : " + hospitalService.deleteHospitalById(1L)); //DELETE HOSPITAL BY ID
+         System.out.println("GET ALL HOSPITAL BY ADDRESS : " + hospitalService.getAllHospitalByAddress("asdfgh")); //GET ALL HOSPITAL BY ADDRESS.
++
++// master
++
++//        Hospital hospital = new Hospital(1L, "City Clinical Hospital No. 1", "Bishkek, st. Fuchika, 15", departments, doctors, patients);
++//        Hospital hospital1 = new Hospital(2L, "Republican Hospital No. 2", "Bishkek, st. Kyiv, 110", departments1, doctors1, patients1);
++//
++//
++//        System.out.println(hospitalService.addHospital(hospital)); //TO ADD HOSPITAL.
++//        System.out.println("FIND HOSPITAL BY ID : " + hospitalService.findHospitalById(1L)); //FIND HOSPITAL BY ID.
++//        System.out.println("GET ALL HOSPITAL : " + hospitalService.getAllHospital()); //GET ALL HOSPITAL.
++//        System.out.println("GET ALL PATIENT FROM HOSPITAL : " + hospitalService.getAllPatientFromHospital(1L)); //GET ALL PATIENT FROM HOSPITAL.
++//        System.out.println("DELETE HOSPITAL BY ID : " + hospitalService.deleteHospitalById(1L)); //DELETE HOSPITAL BY ID
++//        System.out.println("GET ALL HOSPITAL BY ADDRESS : " + hospitalService.getAllHospitalByAddress("asdfgh")); //GET ALL HOSPITAL BY ADDRESS.
+     }
+ }
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n\r\n    <list default=\"true\" id=\"85d8a2c7-6a6a-4de5-aa89-c0b989171f14\" name=\"Changes\" comment=\"added all method\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/medCheck/dao/impl/PatientServiceImplDao.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/medCheck/dao/impl/PatientServiceImplDao.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/medCheck/service/serviceImpl/PatientServiceImpl.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/medCheck/service/serviceImpl/PatientServiceImpl.java\" afterDir=\"false\" />\r\n\r\n    <list default=\"true\" id=\"85d8a2c7-6a6a-4de5-aa89-c0b989171f14\" name=\"Changes\" comment=\"added package\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/misc.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/misc.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/medCheck/dao/impl/HospitalServiceImplDao.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/medCheck/dao/impl/HospitalServiceImplDao.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/medCheck/service/serviceImpl/HospitalServiceImpl.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/medCheck/service/serviceImpl/HospitalServiceImpl.java\" afterDir=\"false\" />\r\n\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"refactor/serviceHospitalImpl1\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2NxH9H9Z4yO4hC3QDPdx7VDhC3W\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"WebServerToolWindowFactoryState\": \"false\",\r\n    \"git-widget-placeholder\": \"feature/add__field__doctor__class\",\r\n    \"node.js.detected.package.eslint\": \"true\",\r\n    \"node.js.detected.package.tslint\": \"true\",\r\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\r\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\r\n    \"onboarding.tips.debug.path\": \"/Users/manasabduganiuulu/IdeaProjects/MedCheck/src/Main.java\",\r\n    \"project.structure.last.edited\": \"Project\",\r\n    \"project.structure.proportion\": \"0.0\",\r\n    \"project.structure.side.proportion\": \"0.2\",\r\n    \"vue.rearranger.settings.migration\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"Main\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;feature/add__function&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;onboarding.tips.debug.path&quot;: &quot;/Users/manasabduganiuulu/IdeaProjects/MedCheck/src/Main.java&quot;,\r\n    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,\r\n    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,\r\n    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,\r\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RunManager\" selected=\"Application.Main\">\r\n    <configuration name=\"Main (1)\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"Main\" />\r\n      <module name=\"MedCheck\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Main\" type=\"Application\" factoryName=\"Application\" nameIsGenerated=\"true\">\r\n\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"Main\" />\r\n      <module name=\"MedCheck\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n\r\n        <item itemvalue=\"Application.Main\" />\r\n        <item itemvalue=\"Application.Main\" />\r\n        <item itemvalue=\"Application.Main\" />\r\n\r\n        <item itemvalue=\"Application.Main (1)\" />\r\n        <item itemvalue=\"Application.Main (1)\" />\r\n\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"85d8a2c7-6a6a-4de5-aa89-c0b989171f14\" name=\"Changes\" comment=\"\" />\r\n      <created>1680598664239</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1680598664239</updated>\r\n      <workItem from=\"1680598666233\" duration=\"2481000\" />\r\n      <workItem from=\"1680613602682\" duration=\"172000\" />\r\n      <workItem from=\"1680613936737\" duration=\"17000\" />\r\n      <workItem from=\"1680613980389\" duration=\"631000\" />\r\n      <workItem from=\"1680613602682\" duration=\"172000\" />\r\n      <workItem from=\"1680613936737\" duration=\"17000\" />\r\n      <workItem from=\"1680613980389\" duration=\"1524000\" />\r\n      <workItem from=\"1680688140187\" duration=\"1549000\" />\r\n      <workItem from=\"1680689735378\" duration=\"5271000\" />\r\n      <workItem from=\"1680695069551\" duration=\"67000\" />\r\n      <workItem from=\"1680671013647\" duration=\"804000\" />\r\n      <workItem from=\"1680672078579\" duration=\"6868000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"added package\">\r\n      <created>1680600157787</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680600157787</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"added package\">\r\n      <created>1680600857145</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680600857145</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"added branch\">\r\n      <created>1680614705620</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680614705620</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"added InterfaceDaoMethod\">\r\n      <created>1680614818425</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680614818425</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"added InterfaceDaoMethod\">\r\n      <created>1680614962393</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680614962393</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"added database\">\r\n      <created>1680610110610</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680610110611</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"added class pole\">\r\n      <created>1680637585566</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680637585566</updated>\r\n    </task>\r\n\r\n    <task id=\"LOCAL-00008\" summary=\"added method addPatientToHospital\">\r\n      <created>1680679913486</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680679913487</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"added all method\">\r\n      <created>1680690534395</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680690534396</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"10\" />\r\n\r\n    <task id=\"LOCAL-00008\" summary=\"added function method addDoctorToHospital\">\r\n      <created>1680676761658</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680676761658</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"added hospitalserviceimpl\">\r\n      <created>1680696564998</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680696564998</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"added test method\">\r\n      <created>1680696740466</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680696740466</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"11\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"added package\" />\r\n    <MESSAGE value=\"added branch\" />\r\n    <MESSAGE value=\"added InterfaceDaoMethod\" />\r\n    <MESSAGE value=\"added serviceMetods\" />\r\n    <MESSAGE value=\"added database\" />\r\n    <MESSAGE value=\"added class pole\" />\r\n\r\n    <MESSAGE value=\"added method addPatientToHospital\" />\r\n    <MESSAGE value=\"added all method\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"added all method\" />\r\n\r\n    <MESSAGE value=\"added function method addDoctorToHospital\" />\r\n    <MESSAGE value=\"added HospitalServiceImplDao\" />\r\n    <MESSAGE value=\"added HospitalServiceImplDao\" />\r\n    <MESSAGE value=\"added hospitalserviceimpl\" />\r\n    <MESSAGE value=\"added test method\" />\r\n    <MESSAGE value=\"added HospitalServiceImplDao\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"added HospitalServiceImplDao\" />\r\n  </component>\r\n  <component name=\"com.intellij.coverage.CoverageDataManagerImpl\">\r\n    <SUITE FILE_PATH=\"coverage/MedCheck$Main.ic\" NAME=\"Main Coverage Results\" MODIFIED=\"1680672801435\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"idea\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 6da9eb8f64674b3478648d4c37da7cb0c635dd70)
++++ b/.idea/workspace.xml	(date 1680758705692)
+@@ -4,18 +4,16 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-
+     <list default="true" id="85d8a2c7-6a6a-4de5-aa89-c0b989171f14" name="Changes" comment="added all method">
+-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/medCheck/dao/impl/PatientServiceImplDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/medCheck/dao/impl/PatientServiceImplDao.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/medCheck/service/serviceImpl/PatientServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/medCheck/service/serviceImpl/PatientServiceImpl.java" afterDir="false" />
+-
+-    <list default="true" id="85d8a2c7-6a6a-4de5-aa89-c0b989171f14" name="Changes" comment="added package">
+       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_4_4_23__17_35__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_4_4_23__17_35__Changes_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_4_23__16_33__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_4_23__16_33__Changes_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_4_23__16_36__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_4_23__16_36__Changes_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_4_23__16_48__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_4_23__16_48__Changes_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_4_23__17_58__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_4_23__17_58__Changes_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_4_23__18_15__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_4_23__18_15__Changes_.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/medCheck/dao/impl/HospitalServiceImplDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/medCheck/dao/impl/HospitalServiceImplDao.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/medCheck/service/serviceImpl/HospitalServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/medCheck/service/serviceImpl/HospitalServiceImpl.java" afterDir="false" />
+-
++      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -43,44 +41,23 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-
+   <component name="PropertiesComponent"><![CDATA[{
+   "keyToString": {
+     "RunOnceActivity.OpenProjectViewOnStart": "true",
+     "RunOnceActivity.ShowReadmeOnStart": "true",
+     "WebServerToolWindowFactoryState": "false",
+-    "git-widget-placeholder": "feature/add__field__doctor__class",
++    "git-widget-placeholder": "feature/add__method__to__main__class",
+     "node.js.detected.package.eslint": "true",
+     "node.js.detected.package.tslint": "true",
+     "node.js.selected.package.eslint": "(autodetect)",
+     "node.js.selected.package.tslint": "(autodetect)",
+     "onboarding.tips.debug.path": "/Users/manasabduganiuulu/IdeaProjects/MedCheck/src/Main.java",
+     "project.structure.last.edited": "Project",
+-    "project.structure.proportion": "0.0",
+-    "project.structure.side.proportion": "0.2",
++    "project.structure.proportion": "0.15",
++    "project.structure.side.proportion": "0.0",
+     "vue.rearranger.settings.migration": "true"
+   }
+ }]]></component>
+-  <component name="RunManager">
+-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+-
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+-    &quot;git-widget-placeholder&quot;: &quot;feature/add__function&quot;,
+-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;onboarding.tips.debug.path&quot;: &quot;/Users/manasabduganiuulu/IdeaProjects/MedCheck/src/Main.java&quot;,
+-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+-  }
+-}</component>
+   <component name="RunManager" selected="Application.Main">
+     <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+       <option name="MAIN_CLASS_NAME" value="Main" />
+@@ -90,7 +67,6 @@
+       </method>
+     </configuration>
+     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
+-
+       <option name="MAIN_CLASS_NAME" value="Main" />
+       <module name="MedCheck" />
+       <method v="2">
+@@ -99,14 +75,11 @@
+     </configuration>
+     <recent_temporary>
+       <list>
+-
+         <item itemvalue="Application.Main" />
+         <item itemvalue="Application.Main" />
+         <item itemvalue="Application.Main" />
+-
+         <item itemvalue="Application.Main (1)" />
+         <item itemvalue="Application.Main (1)" />
+-
+       </list>
+     </recent_temporary>
+   </component>
+@@ -180,23 +153,6 @@
+       <option name="project" value="LOCAL" />
+       <updated>1680637585566</updated>
+     </task>
+-
+-    <task id="LOCAL-00008" summary="added method addPatientToHospital">
+-      <created>1680679913486</created>
+-      <option name="number" value="00008" />
+-      <option name="presentableId" value="LOCAL-00008" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1680679913487</updated>
+-    </task>
+-    <task id="LOCAL-00009" summary="added all method">
+-      <created>1680690534395</created>
+-      <option name="number" value="00009" />
+-      <option name="presentableId" value="LOCAL-00009" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1680690534396</updated>
+-    </task>
+-    <option name="localTasksCounter" value="10" />
+-
+     <task id="LOCAL-00008" summary="added function method addDoctorToHospital">
+       <created>1680676761658</created>
+       <option name="number" value="00008" />
+@@ -231,11 +187,8 @@
+     <MESSAGE value="added serviceMetods" />
+     <MESSAGE value="added database" />
+     <MESSAGE value="added class pole" />
+-
+     <MESSAGE value="added method addPatientToHospital" />
+     <MESSAGE value="added all method" />
+-    <option name="LAST_COMMIT_MESSAGE" value="added all method" />
+-
+     <MESSAGE value="added function method addDoctorToHospital" />
+     <MESSAGE value="added HospitalServiceImplDao" />
+     <MESSAGE value="added HospitalServiceImplDao" />
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_19_PREVIEW\" project-jdk-name=\"openjdk-19\" project-jdk-type=\"JavaSDK\">\r\n\r\n Feature/WritingSenondMethod\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_16\" default=\"true\" project-jdk-name=\"corretto-19\" project-jdk-type=\"JavaSDK\">\r\n\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_19\" project-jdk-name=\"19\" project-jdk-type=\"JavaSDK\">\r\n  master\r\n\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 6da9eb8f64674b3478648d4c37da7cb0c635dd70)
++++ b/.idea/misc.xml	(date 1680758705692)
+@@ -1,14 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_19_PREVIEW" project-jdk-name="openjdk-19" project-jdk-type="JavaSDK">
+-
+- Feature/WritingSenondMethod
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" default="true" project-jdk-name="corretto-19" project-jdk-type="JavaSDK">
+-
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_19" project-jdk-name="19" project-jdk-type="JavaSDK">
+-  master
+-
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_19_PREVIEW" project-jdk-name="19" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
+ </project>
+\ No newline at end of file
