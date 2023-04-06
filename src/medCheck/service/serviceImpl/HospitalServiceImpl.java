@@ -11,9 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 public class HospitalServiceImpl implements HospitalService {
-
-   // private Database database;
-   Database database = new Database(new ArrayList<>());
     HospitalServiceImplDao hospitalServiceImplDao = new HospitalServiceImplDao();
 
     @Override
