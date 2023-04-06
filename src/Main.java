@@ -35,12 +35,6 @@ public class Main {
         HospitalServiceImpl hospitalService = new HospitalServiceImpl(database);
         DoctorServiceImpl doctorService = new DoctorServiceImpl(database);
 
-    public static void main(String[] args) throws MyException {
-        Database database = new Database(new ArrayList<>(new ArrayList<>()));
-        PatientServiceImpl servicePatient = new PatientServiceImpl();
-        DepartmentServiceImpl departmentService = new DepartmentServiceImpl();
-        HospitalServiceImpl hospitalService = new HospitalServiceImpl();
-        DoctorServiceImpl doctorService = new DoctorServiceImpl();
 
 
         Doctor doctor1 = new Doctor(1L, "Bektur", "Duyshenbek uulu", Gender.MALE, 3);
