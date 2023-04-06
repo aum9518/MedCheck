@@ -35,14 +35,6 @@ public class PatientServiceImplDao implements PatientServiceDao {
         } catch (MyException e) {
             System.out.println(e.getMessage());
         }
-       /* for (int i = 0; i < database.getHospitals().size(); i++) {
-            System.out.println("dsljk");
-            if (database.getHospitals().get(i).getId()==id){
-                database.getHospitals().get(i).getPatients().add(patient);
-                return "Successfully added patient: "+database.getHospitals().get(i).getPatients();
-            }
-
-        }*/
         return null;
     }
 
@@ -119,19 +111,25 @@ public class PatientServiceImplDao implements PatientServiceDao {
     @Override
     public Patient getPatientById(Long id) {
 
-        for (Hospital h:database.getHospitals()) {
+       /* for (Hospital h:database.getHospitals()) {
             for (Patient p:h.getPatients()) {
                 if (p.getId()==id){
                     return p;
                 }
             }
-        }
-        return null;
+        }*/
+
+        Optional<Patient>patient = database.getHospitals().stream()
+                .flatMap(h->h.getPatients().stream())
+                .filter(x->x.getId()==id)
+                .findFirst();
+        return patient.orElse(null);
+
     }
 
     @Override
     public Map<Integer, Patient> getPatientByAge() {
-        Map<Integer,Patient>patientMap = new HashMap<>();
+        /*Map<Integer,Patient>patientMap = new HashMap<>();
             List<Hospital>hospitals = database.getHospitals().stream().toList();
            List<List<Patient>>patients= hospitals.stream().map(Hospital::getPatients).toList();
 
@@ -139,6 +137,12 @@ public class PatientServiceImplDao implements PatientServiceDao {
             for (Patient a:p) {
                 patientMap.put(a.getAge(),a);
             }
+        }
+        return patientMap;*/
+        Map<Integer,Patient>patientMap = new HashMap<>();
+        List<Patient>patients = database.getHospitals().stream().flatMap(p->p.getPatients().stream()).toList();
+        for (Patient a:patients) {
+            patientMap.put(a.getAge(),a);
         }
         return patientMap;
     }
