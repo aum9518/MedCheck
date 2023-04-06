@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="85d8a2c7-6a6a-4de5-aa89-c0b989171f14" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/medCheck/dao/impl/DepartmentServiceImplDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/medCheck/dao/impl/DepartmentServiceImplDao.java" afterDir="false" />
+    <list default="true" id="85d8a2c7-6a6a-4de5-aa89-c0b989171f14" name="Changes" comment="added final changing of DepartmentServiceImplDao">
+      <change beforePath="$PROJECT_DIR$/src/medCheck/dao/impl/HospitalServiceImplDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/medCheck/dao/impl/HospitalServiceImplDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/medCheck/service/serviceImpl/DepartmentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/medCheck/service/serviceImpl/DepartmentServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -189,7 +187,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680799069481</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="added final changing of DepartmentServiceImplDao">
+      <created>1680801100500</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1680801100501</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -212,7 +217,8 @@
     <MESSAGE value="added HospitalServiceImplDao" />
     <MESSAGE value="added changed some methods in PatientServiceImplDao" />
     <MESSAGE value="added final changing of PatientService" />
-    <option name="LAST_COMMIT_MESSAGE" value="added final changing of PatientService" />
+    <MESSAGE value="added final changing of DepartmentServiceImplDao" />
+    <option name="LAST_COMMIT_MESSAGE" value="added final changing of DepartmentServiceImplDao" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/MedCheck$Main.ic" NAME="Main Coverage Results" MODIFIED="1680672801435" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

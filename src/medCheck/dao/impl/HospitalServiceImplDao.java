@@ -10,12 +10,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class HospitalServiceImplDao implements HospitalServiceDao {
-    private Database database = new Database();
-
-    public HospitalServiceImplDao(Database database) {
-        this.database = database;
-    }
-
     @Override
     public String addHospital(Hospital hospital) {
         Database.database.getHospitals().add(hospital);
