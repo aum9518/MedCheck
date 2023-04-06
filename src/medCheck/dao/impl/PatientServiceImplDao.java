@@ -1,5 +1,6 @@
 package medCheck.dao.impl;
 
+import com.sun.tools.javac.Main;
 import medCheck.dao.PatientServiceDao;
 import medCheck.database.Database;
 import medCheck.exception.MyException;
@@ -11,16 +12,16 @@ import java.util.stream.Collectors;
 
 
 public class PatientServiceImplDao implements PatientServiceDao {
-    private Database database = new Database();
+    private  Database database ;
 
     public PatientServiceImplDao(Database database) {
-        this.database = database;
+this.database=new Database(new ArrayList<>());
     }
 
     @Override
     public String addPatientToHospital(Long id, Patient patient) {
         boolean isTrue = true;
-        for (Hospital d:database.getHospitals()) {
+        for (Hospital d: Database.database.getHospitals()) {
             if (d.getId()==id){
                 isTrue = true;
                 d.getPatients().add(patient);
@@ -68,9 +69,11 @@ public class PatientServiceImplDao implements PatientServiceDao {
             for (Patient p:h.getPatients()) {
                 if (p.getId()==id){
                     isTrue = true;
-                    h.getPatients().remove(p);
-                    h.getPatients().add(patientsNewInfo);
-                    return "Successfully updated patient: "+ patientsNewInfo;
+                   p.setFirstName(patientsNewInfo.getFirstName());
+                   p.setLastName(patientsNewInfo.getLastName());
+                   p.setGender(patientsNewInfo.getGender());
+                   p.setAge(patientsNewInfo.getAge());
+                    return "Successfully updated patient: "+ p;
                 }else {
                     isTrue = false;
                 }

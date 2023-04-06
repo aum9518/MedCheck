@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Database {
+    public static   Database database = new Database(new ArrayList<>());
 
     private List<Hospital>hospitals = new ArrayList<>();
 
@@ -21,7 +22,6 @@ public class Database {
 
     public Database(List<Hospital> hospitals) {
         this.hospitals = hospitals;
-
     }
     public Database() {
     }

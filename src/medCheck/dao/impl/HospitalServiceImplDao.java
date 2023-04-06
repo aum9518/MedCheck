@@ -18,7 +18,7 @@ public class HospitalServiceImplDao implements HospitalServiceDao {
 
     @Override
     public String addHospital(Hospital hospital) {
-        database.getHospitals().add(hospital);
+        Database.database.getHospitals().add(hospital);
         return "has joined!!!";
     }
 
