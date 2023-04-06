@@ -14,27 +14,27 @@ public class DepartmentServiceImpl implements DepartmentService {
     DepartmentServiceImplDao departmentServiceImplDao = new DepartmentServiceImplDao();
 
     @Override
-    public String addDepartmentToHospital(Long id, Department department) throws MyException {
+    public String addDepartmentToHospital(Long id, Department department){
        return departmentServiceImplDao.addDepartmentToHospital(id,department);
     }
 
     @Override
-    public List<Department> getAllDepartmentByHospital(Long id) throws MyException {
+    public List<Department> getAllDepartmentByHospital(Long id){
         return departmentServiceImplDao.getAllDepartmentByHospital(id);
     }
 
     @Override
-    public Department findDepartmentByName(String name) throws MyException {
+    public Department findDepartmentByName(String name){
         return departmentServiceImplDao.findDepartmentByName(name);
     }
 
     @Override
-    public void deleteDepartmentById(Long id) throws MyException {
+    public void deleteDepartmentById(Long id){
     departmentServiceImplDao.deleteDepartmentById(id);
     }
 
     @Override
-    public String updateDepartmentById(Long id, Department department) throws MyException {
+    public String updateDepartmentById(Long id, Department department) {
         return departmentServiceImplDao.updateDepartmentById(id, department);
     }
 }
