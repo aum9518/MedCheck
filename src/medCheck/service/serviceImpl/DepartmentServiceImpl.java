@@ -41,6 +41,10 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public String updateDepartmentById(Long id, Department department) {
-        return departmentServiceImplDao.updateDepartmentById(id, department);
+        try {
+            return departmentServiceImplDao.updateDepartmentById(id, department);
+        } catch (MyException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
