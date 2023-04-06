@@ -4,95 +4,136 @@ import medCheck.dao.DepartmentServiceDao;
 import medCheck.dao.DoctorServiceDao;
 import medCheck.dao.HospitalServiceDao;
 import medCheck.database.Database;
+import medCheck.enums.Gender;
+import medCheck.exception.MyException;
 import medCheck.model.Department;
 import medCheck.model.Doctor;
 import medCheck.model.Hospital;
 import medCheck.service.DepartmentService;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import javax.print.Doc;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
 public class DoctorServiceImplDao implements DoctorServiceDao {
-    Database database = new Database();
-    List<Hospital>hospitals;
-    Map<Long,Doctor>doctors;
 
+    Department department1 = new Department(1L, "rtgdfgdf", new ArrayList<>(Arrays.asList(new Doctor(1L, "Amir", "Mirlanov", Gender.FEMALE, 1))));
+    List<Department> depart = new ArrayList<>(Arrays.asList(department1));
+    Hospital hospital1 = new Hospital(2L, "Republican Hospital No. 2", "Bishkek, st. Kyiv, 110", depart, new ArrayList<>(), new ArrayList<>());
+    List<Hospital> hospitals = new ArrayList<>(Arrays.asList(hospital1));
+    Database database = new Database(hospitals);
 
     @Override
     public String addDoctorToHospital(Long id, Doctor doctor) {
+        for (Hospital h : database.getHospitals()) {
 
-        Hospital hospital = database.getHospitals().stream()
-                .filter(h -> h.getId().equals(id))
-                .findFirst()
-                .orElse(null);
-        if (hospital == null) {
-            return "Hospital not found!";
+            if (Objects.equals(h.getId(), id)) {
+                h.getDoctors().add(doctor);
+                return "Doctor added to hospital successfully."+doctor;
+            }
         }
-        doctor.setId(doctor.getId());
-        hospital.getDoctors().add(doctor);
-        doctors.put(doctor.getId(), doctor);
-        return "Doctor added to hospital successfully.";
+        return "Hospital not found!";
     }
 
     @Override
     public Doctor findDoctorById(Long id) {
-        return doctors.get(id);
+        for (Hospital h : database.getHospitals()) {
+            for (Doctor d : h.getDoctors()) {
+                if (d.getId() == id) {
+                    return d;
+                }
+            }
+        }
+        return null;
     }
 
     @Override
     public String updateDoctor(Long id, Doctor doctor) {
-        if (!doctors.containsKey(id)) {
-            return "Doctor not found!";
+        for (Hospital h : database.getHospitals()) {
+            for (Doctor d : h.getDoctors()) {
+                if (h.getId() == id) {
+                    h.getDoctors().remove(d);
+                    h.getDoctors().add(doctor);
+                    return "Doctor updated successfully." + doctor;
+                }
+            }
         }
-        doctor.setId(id);
-        doctors.put(id, doctor);
-        return "Doctor updated successfully.";
+        return "Doctor not found!";
     }
 
     @Override
     public void deleteDoctorById(Long id) {
-        doctors.remove(id);
-        database.getHospitals().stream()
-                .flatMap(h -> h.getDepartments().stream())
-                .forEach(d -> d.getDoctors().removeIf(doc -> doc.getId().equals(id)));
+        boolean isTrue = true;
+        for (Hospital h : database.getHospitals()) {
+            for (Doctor d : h.getDoctors()) {
+                if (d.getId() == id) {
+                    isTrue = true;
+                    h.getDoctors().remove(d);
+                    System.out.println("Doctor removed successfully");
+                    break;
+                } else {
+                    isTrue = false;
+                }
+            }
+        }
+        try {
+            if (!isTrue) {
+                throw new MyException("Doctor not found!");
 
+            }
+        } catch (MyException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
     public String assignDoctorToDepartment(Long departmentId, List<Long> doctorsId) {
-        Department department = database.getHospitals().stream()
-                .flatMap(h -> h.getDepartments().stream())
-                .filter(d -> d.getId().equals(departmentId))
-                .findFirst()
-                .orElse(null);
-        if (department == null) {
-            return "Department not found!";
+        for (Hospital h : database.getHospitals()) {
+            for (Department d : h.getDepartments()) {
+                for (Doctor o : h.getDoctors()) {
+                    if (d.getId() == departmentId) {
+                        doctorsId.add(o.getId());
+                        return "Doctor id added successfully" + doctorsId;
+                    }
+                }
+            }
         }
-        List<Doctor> doctorsToAdd = doctorsId.stream()
-                .map(doctorId -> doctors.get(doctorId))
-                .toList();
-        department.getDoctors().addAll(doctorsToAdd);
-        return "Doctors assigned to department successfully.";
+        return "Invalid partition ID";
     }
 
     @Override
     public List<Doctor> getAllDoctorsByHospitalId(Long id) {
-        return database.getHospitals().stream()
-                .filter(h -> h.getId().equals(id))
-                .flatMap(h -> h.getDoctors().stream())
-                .collect(Collectors.toList());
+        boolean isTrue = true;
+
+        for (Hospital h : database.getHospitals()) {
+            if (Objects.equals(h.getId(), id)) {
+                isTrue = true;
+                return h.getDoctors();
+            } else {
+                isTrue = false;
+            }
+        }
+        try {
+            if (!isTrue) {
+                throw new MyException("Hospital with id " + id + " does not exist.");
+            }
+        } catch (MyException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 
     @Override
     public List<Doctor> getAllDoctorsByDepartmentId(Long id) {
+        for (Hospital h : database.getHospitals()) {
+            for (Department d : h.getDepartments()) {
+                if (Objects.equals(d.getId(), id)) {
+                    return d.getDoctors();
+                }
+            }
+        }
 
-        return database.getHospitals().stream()
-                .flatMap(h -> h.getDepartments().stream())
-                .filter(d -> d.getId().equals(id))
-                .flatMap(d -> d.getDoctors().stream())
-                .collect(Collectors.toList());
+        return null;
     }
 }
