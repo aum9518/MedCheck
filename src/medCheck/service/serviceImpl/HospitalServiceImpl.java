@@ -21,8 +21,7 @@ public class HospitalServiceImpl implements HospitalService {
 
     @Override
     public String addHospital(Hospital hospital) {
-        hospitalServiceImplDao.addHospital(hospital);
-        return "has joined!!!";
+       return hospitalServiceImplDao.addHospital(hospital);
     }
 
     @Override
