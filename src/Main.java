@@ -48,8 +48,10 @@ public class Main {
         List<Patient> patients = new ArrayList<>(List.of(patient, patient1));
         List<Patient> patients1 = new ArrayList<>(List.of(patient2, patient3));
 
+
         Hospital hospital = new Hospital(1L, "City Clinical Hospital No. 1", "Bishkek, st. Fuchika, 15", departments, doctors, patients);
         Hospital hospital1 = new Hospital(2L, "Republican Hospital No. 2", "Bishkek, st. Kyiv, 110", departments1, doctors1, patients1);
+
 
         System.out.println(hospitalService.addHospital(hospital)); //TO ADD HOSPITAL.
         System.out.println("FIND HOSPITAL BY ID : " + hospitalService.findHospitalById(1L)); //FIND HOSPITAL BY ID.
@@ -60,7 +62,7 @@ public class Main {
 
         System.out.println("Add patient to Hospital: "+servicePatient.addPatientToHospital(1L, patient2));
         System.out.println("Add list of patient: "+servicePatient.addPatientsToHospital(1L, patients1));
-        System.out.println("Get patient by id: "+servicePatient.getPatientById(4L));
+        System.out.println("Get patient by id: "+servicePatient.getPatientById(3L));
         System.out.println("Get patient by age: "+servicePatient.getPatientByAge());
         System.out.println("Update patient by id: "+servicePatient.updatePatientById(3L, patient1));
         System.out.println("Sort patient by age(Ascending/Descending): "+servicePatient.sortPatientsByAge("Descending"));
