@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="85d8a2c7-6a6a-4de5-aa89-c0b989171f14" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/medCheck/dao/impl/DoctorServiceImplDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/medCheck/dao/impl/DoctorServiceImplDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/medCheck/dao/impl/HospitalServiceImplDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/medCheck/dao/impl/HospitalServiceImplDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/medCheck/dao/impl/PatientServiceImplDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/medCheck/dao/impl/PatientServiceImplDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/medCheck/database/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/medCheck/database/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/medCheck/service/serviceImpl/PatientServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/medCheck/service/serviceImpl/PatientServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

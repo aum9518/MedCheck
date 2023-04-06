@@ -25,7 +25,7 @@ public class HospitalServiceImplDao implements HospitalServiceDao {
     @Override
     public Hospital findHospitalById(Long id) {
         boolean isTrue = true;
-        for (Hospital d : database.getHospitals()) {
+        for (Hospital d : Database.database.getHospitals()) {
             if (Objects.equals(d.getId(), id)) {
                 isTrue = true;
                 return d;
@@ -45,13 +45,13 @@ public class HospitalServiceImplDao implements HospitalServiceDao {
 
     @Override
     public List<Hospital> getAllHospital() {
-        return database.getHospitals();
+        return Database.database.getHospitals();
     }
 
     @Override
     public List<Patient> getAllPatientFromHospital(Long id) {
         boolean isTrue = true;
-        for (Hospital d : database.getHospitals()) {
+        for (Hospital d : Database.database.getHospitals()) {
             for (Patient p : d.getPatients()) {
                 if (Objects.equals(d.getId(), id)) {
                     isTrue = true;
@@ -74,8 +74,8 @@ public class HospitalServiceImplDao implements HospitalServiceDao {
     @Override
     public String deleteHospitalById(Long id) {
         boolean isTrue = true;
-        synchronized (database.getHospitals()) {
-            Iterator<Hospital> iterator = database.getHospitals().iterator();
+        synchronized (Database.database.getHospitals()) {
+            Iterator<Hospital> iterator = Database.database.getHospitals().iterator();
             while (iterator.hasNext()) {
                 Hospital h = iterator.next();
                 if (h.getId() == id) {
@@ -101,7 +101,7 @@ public class HospitalServiceImplDao implements HospitalServiceDao {
     public Map<String, Hospital> getAllHospitalByAddress(String address) {
         try {
             Map<String,Hospital> map = new HashMap<>();
-            for (Hospital h : database.getHospitals()) {
+            for (Hospital h : Database.database.getHospitals()) {
                 if (h.getAddress().equalsIgnoreCase(address)) {
                     map.put(h.getAddress(),h);
                     return map;
