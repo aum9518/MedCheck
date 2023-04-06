@@ -70,7 +70,7 @@ public class Main {
         System.out.println("DELETE DOCTOR BY ID: ");
         doctorService.deleteDoctorById(1L);
         List<Long> list = new ArrayList<>();
-        System.out.println("\n ASSIGN DOCTOR TO DEPARTMENT: " + doctorService.assignDoctorToDepartment(1L, list));
+        System.out.println(" ASSIGN DOCTOR TO DEPARTMENT: " + doctorService.assignDoctorToDepartment(1L, list));
         System.out.println("ASSIGN DOCTOR TO DEPARTMENT: " + doctorService.assignDoctorToDepartment(4L, list));
         System.out.println("GET ALL DOCTORS BY HOSPITAL ID: " + doctorService.getAllDoctorsByHospitalId(2L));
         System.out.println("GET ALL DOCTORS BY DEPARTMENT ID: " + doctorService.getAllDoctorsByDepartmentId(1L));
@@ -85,14 +85,10 @@ public class Main {
         System.out.println("Sort patient by age(Ascending/Descending): " + servicePatient.sortPatientsByAge("Descending"));
         servicePatient.removePatientById(4L);
 
-        System.out.println("ADD DEPARTMENT TO HOSPITAL : " + departmentService.addDepartmentToHospital(2L, department2));
-        System.out.println("GET ALL DEPARTMENT BY HOSPITAL : " + departmentService.getAllDepartmentByHospital(2L));
+        System.out.println("ADD DEPARTMENT TO HOSPITAL : " + departmentService.addDepartmentToHospital(1L, department2));
+        System.out.println("GET ALL DEPARTMENT BY HOSPITAL : " + departmentService.getAllDepartmentByHospital(1L));
         System.out.println("FIND DEPARTMENT BY NAME : " + departmentService.findDepartmentByName("Pharmacy department"));
-
         System.out.println("UPDATE DEPARTMENT BY ID : " + departmentService.updateDepartmentById(2L, department1));
-
-        System.out.println("UPDATE DEPARTMENT BY ID : " + departmentService.updateDepartmentById(1L,department1));
-        
         departmentService.deleteDepartmentById(2L);
 
     }

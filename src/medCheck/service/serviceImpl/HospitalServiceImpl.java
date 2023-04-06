@@ -17,7 +17,7 @@ public class HospitalServiceImpl implements HospitalService {
         this.database = database;
     }
 
-    HospitalServiceImplDao hospitalServiceImplDao = new HospitalServiceImplDao(database);
+    HospitalServiceImplDao hospitalServiceImplDao = new HospitalServiceImplDao();
 
     @Override
     public String addHospital(Hospital hospital) {

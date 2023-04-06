@@ -12,13 +12,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class DepartmentServiceImplDao implements DepartmentServiceDao {
-
-    private Database database = new Database();
-
-    public DepartmentServiceImplDao(Database database) {
-        this.database = database;
-    }
-
     @Override
     public String addDepartmentToHospital(Long id, Department department) {
         boolean isTrue = true;
@@ -99,15 +92,15 @@ public class DepartmentServiceImplDao implements DepartmentServiceDao {
     }
 
     @Override
-    public String updateDepartmentById(Long id, Department department) throws MyException {
+    public String updateDepartmentById(Long id, Department department)  {
         boolean isTrue = true;
         for (Hospital h : Database.database.getHospitals()) {
             for (Department d : h.getDepartments()) {
-                if (d.getId() == id) {
+                if (Objects.equals(d.getId(), id)) {
                     isTrue = true;
-                    h.getDepartments().remove(d);
-                    System.out.println("Successfully removed department with id: " + id);
-                    break;
+                    d.setDepartmentName(department.getDepartmentName());
+                    d.setDoctors(department.getDoctors());
+                   return "Successfully updated department: " + d;
                 } else {
                     isTrue = false;
                 }
