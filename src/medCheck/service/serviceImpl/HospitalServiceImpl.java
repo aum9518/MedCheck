@@ -11,7 +11,13 @@ import java.util.List;
 import java.util.Map;
 
 public class HospitalServiceImpl implements HospitalService {
-    HospitalServiceImplDao hospitalServiceImplDao = new HospitalServiceImplDao();
+    private Database database = new Database();
+
+    public HospitalServiceImpl(Database database) {
+        this.database = database;
+    }
+
+    HospitalServiceImplDao hospitalServiceImplDao = new HospitalServiceImplDao(database);
 
     @Override
     public String addHospital(Hospital hospital) {

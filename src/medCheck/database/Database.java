@@ -4,11 +4,12 @@ import medCheck.model.Doctor;
 import medCheck.model.Hospital;
 
 import javax.print.Doc;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Database {
 
-    private List<Hospital>hospitals;
+    private List<Hospital>hospitals = new ArrayList<>();
 
     public List<Hospital> getHospitals() {
         return hospitals;
