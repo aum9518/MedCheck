@@ -4,35 +4,61 @@ import medCheck.database.Database;
 import medCheck.exception.MyException;
 import medCheck.model.Department;
 import medCheck.model.Hospital;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-    public class DepartmentServiceImplDao implements DepartmentServiceDao {@Override
-    public String addDepartmentToHospital(Long id, Department department) throws MyException {
-        for (Hospital h : database.getHospitals()) {
-            if (h.getId() == id) {
-                h.getDepartments().add(department);
-                return "Department added successfully.";
-            }
-        }
-        throw new MyException("Hospital with id " + id + " does not exist.");
-    }
-
-
-
-        Database database = new Database();
+    public class DepartmentServiceImplDao implements DepartmentServiceDao {
+        Hospital hospital1 = new Hospital(2L, "Republican Hospital No. 2", "Bishkek, st. Kyiv, 110", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        List<Hospital> hospitals = new ArrayList<>(Arrays.asList(hospital1));
+        Database database = new Database(hospitals);
 
         @Override
-        public List<Department> getAllDepartmentByHospital(Long id) throws MyException {
+        public String addDepartmentToHospital(Long id, Department department) {
+            boolean isTrue = true;
             for (Hospital h : database.getHospitals()) {
                 if (Objects.equals(h.getId(), id)) {
-                    return h.getDepartments();
+                    isTrue = true;
+                    h.getDepartments().add(department);
+                    return "Department added successfully.";
+                } else {
+                    isTrue = false;
                 }
             }
-            throw new MyException("Hospital with id " + id + " does not exist.");
+            try {
+                if (!isTrue) {
+                    throw new MyException("Hospital with id " + id + " does not exist.");
+                }
+            } catch (MyException e) {
+                System.out.println(e.getMessage());
+            }
+            return null;
         }
 
         @Override
-        public Department findDepartmentByName(String name) throws MyException {
+        public List<Department> getAllDepartmentByHospital(Long id) {
+            boolean isTrue = true;
+            for (Hospital h : database.getHospitals()) {
+                if (Objects.equals(h.getId(), id)) {
+                    isTrue = true;
+                    return h.getDepartments();
+                } else {
+                    isTrue = false;
+                }
+            }
+            try {
+                if (!isTrue) {
+                    throw new MyException("Hospital with id " + id + " does not exist.");
+                }
+            } catch (MyException e) {
+                System.out.println(e.getMessage());
+            }
+            return null;
+        }
+
+        @Override
+        public Department findDepartmentByName(String name) {
             for (Hospital ha : database.getHospitals()) {
                 for (Department department : ha.getDepartments()) {
                     if (department.getDepartmentName().equals(name)) {
@@ -40,36 +66,55 @@ import java.util.Objects;
                     }
                 }
             }
-            throw new MyException("Department with name '" + name + "' not found.");
+            return null;
         }
 
         @Override
-        public void deleteDepartmentById(Long id) throws MyException {
+        public void deleteDepartmentById(Long id) {
+            boolean isTrue = true;
             for (Hospital h : database.getHospitals()) {
-                for (Department department : h.getDepartments()) {
-                    if (Objects.equals(department.getId(), id)) {
-                        try {
-                            h.getDepartments().remove(department);
-                            System.out.println("Department removed successfully.");
-                        } catch (NullPointerException e) {
-                            throw new MyException("Error deleting department: " + e.getMessage());
-                        }
+                for (Department d : h.getDepartments()) {
+                    if (d.getId() == id) {
+                        isTrue = true;
+                        h.getDepartments().remove(d);
+                        System.out.println("Successfully removed department with id: " + id);
+                        break;
+                    } else {
+                        isTrue = false;
                     }
                 }
+            }
+            try {
+                if (!isTrue) {
+                    throw new MyException("Not found department with id: " + id);
+                }
+            } catch (MyException | ArithmeticException e) {
+                System.out.println(e.getMessage());
             }
         }
 
         @Override
-        public String updateDepartmentById(Long id, Department department) throws MyException {
+        public String updateDepartmentById(Long id, Department department) {
+            boolean isTrue = true;
             for (Hospital h : database.getHospitals()) {
-                for (Department dep : h.getDepartments()) {
-                    if (Objects.equals(dep.getId(), id)) {
-                        dep.setDepartmentName(department.getDepartmentName());
-                        dep.setDoctors(department.getDoctors());
+                for (Department d : h.getDepartments()) {
+                    if (h.getId() == id) {
+                        isTrue = true;
+                        h.getDepartments().remove(d);
+                        h.getDepartments().add(department);
                         return "Department updated successfully.";
+                    } else {
+                        isTrue = false;
                     }
                 }
             }
-            throw new MyException("Department with id " + id + " does not exist.");
+            try {
+                if (!isTrue) {
+                    throw new MyException("Department with id " + id + " does not exist.");
+                }
+            } catch (MyException e) {
+                System.out.println(e.getMessage());
+            }
+            return null;
         }
     }

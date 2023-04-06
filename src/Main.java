@@ -1,6 +1,8 @@
+import medCheck.dao.impl.DepartmentServiceImplDao;
 import medCheck.dao.impl.HospitalServiceImplDao;
 import medCheck.database.Database;
 import medCheck.enums.Gender;
+import medCheck.exception.MyException;
 import medCheck.model.Department;
 import medCheck.model.Doctor;
 import medCheck.model.Hospital;
@@ -18,9 +20,10 @@ import medCheck.service.serviceImpl.HospitalServiceImpl;
 import medCheck.service.serviceImpl.PatientServiceImpl;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws MyException {
         Database database = new Database(new ArrayList<>(new ArrayList<>()));
         PatientServiceImpl servicePatient = new PatientServiceImpl();
+        DepartmentServiceImpl departmentService = new DepartmentServiceImpl();
 
         HospitalServiceImpl hospitalService = new HospitalServiceImpl();
 
@@ -64,5 +67,11 @@ public class Main {
         System.out.println("Update patient by id: "+servicePatient.updatePatientById(3L, patient1));
         System.out.println("Sort patient by age(Ascending/Descending): "+servicePatient.sortPatientsByAge("Descending"));
         servicePatient.removePatientById(4L);
+
+        System.out.println("ADD DEPARTMENT TO HOSPITAL : " + departmentService.addDepartmentToHospital(2L,department2));
+        System.out.println("GET ALL DEPARTMENT BY HOSPITAL : " + departmentService.getAllDepartmentByHospital(2L));
+        System.out.println("FIND DEPARTMENT BY NAME : " + departmentService.findDepartmentByName("Pharmacy department"));
+        System.out.println("UPDATE DEPARTMENT BY ID : " + departmentService.updateDepartmentById(1L,department1));
+        departmentService.deleteDepartmentById(3L);
     }
 }
