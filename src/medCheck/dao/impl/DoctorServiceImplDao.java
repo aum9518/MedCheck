@@ -27,12 +27,12 @@ public class DoctorServiceImplDao implements DoctorServiceDao {
     @Override
     public String addDoctorToHospital(Long id, Doctor doctor) {
         try {
-            for (Hospital h : database.getHospitals()) {
+            for (Hospital h : Database.database.getHospitals()) {
                 if (Objects.equals(h.getId(), id)) {
                     h.getDoctors().add(doctor);
                     return "Doctor added to hospital successfully." + doctor;
                 } else {
-                    throw new MyException("ID not found!");
+                    throw new MyException("  ");
                 }
             }
         } catch (MyException m) {
@@ -45,7 +45,7 @@ public class DoctorServiceImplDao implements DoctorServiceDao {
     public Doctor findDoctorById(Long id) {
 
         try {
-            for (Hospital h : database.getHospitals()) {
+            for (Hospital h :Database.database.getHospitals()) {
                 for (Doctor d : h.getDoctors()) {
                     if (d.getId().equals(id)) {
                         return d;
@@ -64,7 +64,7 @@ public class DoctorServiceImplDao implements DoctorServiceDao {
     @Override
     public String updateDoctor(Long id, Doctor doctor) {
         try {
-            for (Hospital h : database.getHospitals()) {
+            for (Hospital h :Database.database.getHospitals()) {
                 for (Doctor d : h.getDoctors()) {
                     if (h.getId().equals(id)) {
                         d.setFirstName(d.getFirstName());
@@ -73,7 +73,7 @@ public class DoctorServiceImplDao implements DoctorServiceDao {
                         d.setExperienceYear(d.getExperienceYear());
                         return "Doctor updated successfully." + doctor;
                     } else {
-                        throw new MyException("ID not found!");
+                        throw new MyException("  ");
                     }
                 }
             }
@@ -88,7 +88,7 @@ public class DoctorServiceImplDao implements DoctorServiceDao {
     public void deleteDoctorById(Long id) {
         try {
             boolean isTrue = true;
-            for (Hospital h : database.getHospitals()) {
+            for (Hospital h :Database.database.getHospitals()) {
                 for (Doctor d : h.getDoctors()) {
                     if (d.getId().equals(id)) {
                         isTrue = true;
@@ -112,18 +112,22 @@ public class DoctorServiceImplDao implements DoctorServiceDao {
     @Override
     public String assignDoctorToDepartment(Long departmentId, List<Long> doctorsId) {
         try {
-            for (Hospital h : database.getHospitals()) {
+            boolean isTrue=true;
+            for (Hospital h :Database.database.getHospitals()) {
                 for (Department d : h.getDepartments()) {
                     for (Doctor o : h.getDoctors()) {
                         if (d.getId().equals(departmentId)) {
+                            isTrue = true;
                             doctorsId.add(o.getId());
                             return "Doctor id added successfully" + doctorsId;
-                        } else {
-                            throw new MyException("Doctor not found!");
+                        }else {
+                            isTrue=false;
+                            throw new MyException("  ");
                         }
                     }
                 }
             }
+            isTrue=false;
         } catch (MyException m) {
             System.out.println(m.getMessage());
         }
@@ -134,19 +138,14 @@ public class DoctorServiceImplDao implements DoctorServiceDao {
     @Override
     public List<Doctor> getAllDoctorsByHospitalId(Long id) {
         try {
-            boolean isTrue = true;
-
-            for (Hospital h : database.getHospitals()) {
-                if (Objects.equals(h.getId(), id)) {
-                    isTrue = true;
+            boolean isTrue=true;
+            for (Hospital h : Database.database.getHospitals()) {
+                if (h.getId().equals(id)) {
+                    isTrue=true;
                     return h.getDoctors();
                 } else {
-                    isTrue = false;
+                    throw new MyException("Hospital with id " + id + " does not exist.");
                 }
-            }
-
-            if (!isTrue) {
-                throw new MyException("Hospital with id " + id + " does not exist.");
             }
         } catch (MyException e) {
             System.out.println(e.getMessage());
@@ -157,12 +156,12 @@ public class DoctorServiceImplDao implements DoctorServiceDao {
     @Override
     public List<Doctor> getAllDoctorsByDepartmentId(Long id) {
         try {
-            for (Hospital h : database.getHospitals()) {
+            for (Hospital h :Database.database.getHospitals()) {
                 for (Department d : h.getDepartments()) {
                     if (Objects.equals(d.getId(), id)) {
                         return d.getDoctors();
                     } else {
-                        throw new MyException("ID not found!");
+                        throw new MyException("  ");
                     }
                 }
             }
