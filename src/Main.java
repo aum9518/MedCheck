@@ -88,7 +88,11 @@ public class Main {
         System.out.println("ADD DEPARTMENT TO HOSPITAL : " + departmentService.addDepartmentToHospital(2L, department2));
         System.out.println("GET ALL DEPARTMENT BY HOSPITAL : " + departmentService.getAllDepartmentByHospital(2L));
         System.out.println("FIND DEPARTMENT BY NAME : " + departmentService.findDepartmentByName("Pharmacy department"));
+
         System.out.println("UPDATE DEPARTMENT BY ID : " + departmentService.updateDepartmentById(2L, department1));
+
+        System.out.println("UPDATE DEPARTMENT BY ID : " + departmentService.updateDepartmentById(1L,department1));
+        
         departmentService.deleteDepartmentById(2L);
 
     }
