@@ -11,29 +11,30 @@ import java.util.List;
 import java.util.Map;
 
 public class PatientServiceImpl implements PatientService {
-  private Database database = new Database();
+    private Database database = new Database();
+
     public PatientServiceImpl(Database database) {
         this.database = new Database(new ArrayList<>());
     }
 
-    PatientServiceImplDao patientServiceImplDao = new PatientServiceImplDao(database);
+    PatientServiceImplDao patientServiceImplDao = new PatientServiceImplDao();
 
     @Override
     public String addPatientToHospital(Long id, Patient patient) {
         database.setHospitals(new ArrayList<>());
-        return patientServiceImplDao.addPatientToHospital(id,patient);
+        return patientServiceImplDao.addPatientToHospital(id, patient);
     }
 
     @Override
     public String addPatientsToHospital(Long id, List<Patient> patients) {
 
-        return patientServiceImplDao.addPatientsToHospital(id,patients);
+        return patientServiceImplDao.addPatientsToHospital(id, patients);
     }
 
     @Override
     public String updatePatientById(Long id, Patient patientsNewInfo) {
 
-        return patientServiceImplDao.updatePatientById(id,patientsNewInfo);
+        return patientServiceImplDao.updatePatientById(id, patientsNewInfo);
     }
 
     @Override
