@@ -66,12 +66,12 @@ public class Main {
 
         System.out.println("ADD DOCTOR TO HOSPITAL: " + doctorService.addDoctorToHospital(1L, doctor1));
         System.out.println("FIND DOCTOR BY ID: " + doctorService.findDoctorById(1L));
-        System.out.println("UPDATE DOCTOR: " + doctorService.updateDoctor(3L, doctor1));
+        System.out.println("UPDATE DOCTOR: " + doctorService.updateDoctor(1L, doctor1));
         System.out.println("DELETE DOCTOR BY ID: ");
         doctorService.deleteDoctorById(1L);
         List<Long> list = new ArrayList<>();
-        System.out.println("ASSIGN DOCTOR TO DEPARTMENT: " + doctorService.assignDoctorToDepartment(4L, list));
-        System.out.println("GET ALL DOCTORS BY HOSPITAL ID: " + doctorService.getAllDoctorsByHospitalId(2L));
+        System.out.println("ASSIGN DOCTOR TO DEPARTMENT: " + doctorService.assignDoctorToDepartment(1L, list));
+        System.out.println("GET ALL DOCTORS BY HOSPITAL ID: " + doctorService.getAllDoctorsByHospitalId(1L));
         System.out.println("GET ALL DOCTORS BY DEPARTMENT ID: " + doctorService.getAllDoctorsByDepartmentId(1L));
         doctorService.deleteDoctorById(3L);
         System.out.println("==================================================");
